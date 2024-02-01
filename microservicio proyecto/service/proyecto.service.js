@@ -1,8 +1,9 @@
 const pool = require('../db');
 
-const ProyectosService = {
+const ProyectoService = {
   getAll: async () => {
     const result = await pool.query('SELECT * FROM Proyectos');
+    console.log(JSON.stringify(result.rows, null, 2)); // Imprime en consola
     return result.rows;
   },
 
@@ -11,21 +12,21 @@ const ProyectosService = {
     return result.rows[0];
   },
 
-  create: async (nombre, descripcion, createby) => {
+  create: async (name, descripcion, createby) => {
     const result = await pool.query(
-      'INSERT INTO Proyectos (name_proyect, proyect_description, create_by) VALUES ($1, $2, $3) RETURNING ',
-      [nombre, descripcion, createby]
+      'INSERT INTO Proyectos (name_proyect, proyect_description, create_by) VALUES ($1, $2, $3) RETURNING *',
+      [name, descripcion, createby]
     );
     return result.rows[0];
   },
 
-  update: async (id, nombre, descripcion) => {
+  update: async (id, name, descripcion) => {
     const result = await pool.query(
-      'UPDATE Proyectos SET name_proyect = $1, proyect_description = $2 WHERE proyect_id = $3 RETURNING',
-      [nombre, descripcion, id]
+      'UPDATE Proyectos SET name_proyect = $1, proyect_description = $2 WHERE proyect_id = $3 RETURNING*',
+      [name, descripcion, id]
     );
     return result.rows[0];
   }
 };
 
-module.exports = ProyectosService;
+module.exports = ProyectoService;
