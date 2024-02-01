@@ -1,64 +1,60 @@
-const pool = require("../db");
+const Tareas = require("../service/tareas.service");
 
 const getAlltask = async (req, res, next) => {
   try {
-    const alltask = await pool.query("SELECT * FROM tareas");
-    res.json(alltask.rows);
+    const allTask = await Tareas.getAll;
+    res.json(allEpic);
+  } catch (error) {
+    next(error);
+  }
+};
+const getTask = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const taskbyid = await Tareas.getByid(id);
+    if (!taskbyid) {
+      return res.status(404).json({ message: "tarea no encontrada" });
+    }
+    res.json(taskbyid);
   } catch (error) {
     next(error);
   }
 };
 
-const getTask = async (req, res, next) => {
-  try {
-    const result = await pool.query("SELECT * FROM tareas WHERE task_id=$1", [
-      req.params.id,
-    ]);
-    res.json(result.rows[0]);
-  } catch (error) {}
-};
-
 const createTask = async (req, res, next) => {
   try {
-    const createtask = await pool.query(
-      "INSERT INTO tareas (task_title, task_description, task_state, date_start, date_end)VALUES($1,$2,$3,$4,$5) RETURNING *",
-      [
-        req.body.title,
-        req.body.description,
-        req.body.state,
-        req.body.date_start,
-        req.body.date_end,
-      ]
+    const { title, description, state, dateStart, dateEnd } = req.body;
+    const newTask = await Tareas.createTask(
+      title,
+      description,
+      state,
+      dateStart,
+      dateEnd
     );
-    res.json(createtask.rows[0]);
+    res.status(201).json(newTask);
   } catch (error) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre de la tarea ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
-    }
+    next(error);
   }
 };
 
 const updateTask = async (req, res, next) => {
   try {
-    const resutl = await pool.query(
-      "UPDATE tareas SET task_title=$1, task_description=$2, task_state=$3, date_start=$4, date_end=$5 WHERE task_id =$6 RETURNING*",
-      [
-        req.body.title,
-        req.body.description,
-        req.body.state,
-        req.body.date_start,
-        req.body.date_end,
-        req.params.id,
-      ]
+    const id = req.params.id;
+    const { title, description, state, dateStart, dateEnd } = req.body;
+    const updateTask = await Tareas.updateTask(
+      id,
+      title,
+      description,
+      state,
+      dateStart,
+      dateEnd
     );
-  } catch (error) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre del proyecto ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
+    if (!updateTask) {
+      return res.status(404).json({ message: "Epcia no encontrada" });
     }
+    res.json(updateTask);
+  } catch (error) {
+    next(error);
   }
 };
 

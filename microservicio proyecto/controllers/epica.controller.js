@@ -1,61 +1,53 @@
-const { json } = require("express");
-const pool = require("../db");
+const Epica = require("../service/epica.service");
 
-const getAllepics = async (req, res, next) => {
+const getAllepic = async (req, res, next) => {
   try {
-    const allEpics = await pool.query("SELECT * FROM epica");
-    res.json(allEpics.rows);
+    const allEpic = await Epica.getAll;
+    res.json(allEpic);
   } catch (error) {
     next(error);
   }
 };
-
 const getEpic = async (req, res, next) => {
   try {
-    const result = await pool.query("SELECT * FROM epica WHERE epica_id =$1", [
-      req.params.id,
-    ]);
-    res, json(result.rows[0]);
+    const id = req.params.id;
+    const epicbyid = await Epica.getByid(id);
+    if (!epicbyid) {
+      return res.status(404).json({ message: "Epica no encontrada" });
+    }
+    res.json(epicbyid);
   } catch (error) {
     next(error);
   }
 };
 
-const createEpic = async (req, res) => {
+const createEpic = async (req, res, next) => {
   try {
-    const result = await pool.query(
-      "INSERT INTO epica(title, description) VALUES ($1, $2) RETURNING *",
-      [req.body.title, req.body.descripcion]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre de la epica ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
-    }
+    const { title, description } = req.body;
+    const newEpic = await Epica.create(title, description);
+    res.status(201).json(newEpic);
+  } catch (error) {
+    next(error);
   }
 };
 
-const updateEpic = async (req, res) => {
+const updateEpic = async (req, res, next) => {
   try {
-    const result = await pool.query(
-      "UPDATE proyectos SET title= $1, description = $2 WHERE epica_id = $3 RETURNING *",
-      [req.body.title, req.body.descripcion, req.params.id]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre de la epica  ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
+    const id = req.params.id;
+    const { title, description } = req.body;
+    const updateEpic = await Epica.update(id, title, description);
+    if (!updateEpic) {
+      return res.status(404).json({ message: "Epcia no encontrada" });
     }
+    res.json(updateEpic);
+  } catch (error) {
+    next(error);
   }
 };
 
-module.exports={
-    getAllepics,
-    getEpic,
-    createEpic,
-    updateEpic
+module.exports = {
+  getAllepic,
+  getEpic,
+  createEpic,
+  updateEpic,
 };

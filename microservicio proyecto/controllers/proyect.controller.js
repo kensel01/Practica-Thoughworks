@@ -1,61 +1,56 @@
-const { json } = require("express");
-const pool = require("../db");
+const ProyectosService = require('../service/proyecto.service');
+const Proyectos = require('../models/proyecto.model');
 
-const getAllproyect = async (req, res, next) => {
-  try {
-    const allProyect = await pool.query("SELECT * FROM proyectos");
-    res.json(allProyect.rows);
-  } catch (error) {
-    next(error);
-  }
-};
+const ProyectosController = {
+  getAllproyect: async (req, res, next) => {
+    try {
+      const proyectosData = await ProyectosService.getAll();
+      const proyectos = proyectosData.map(pd => new Proyectos(pd.id, pd.name, pd.description, pd.createby));
+      res.json(proyectos);
+    } catch (error) {
+      next(error);
+    }
+  },
 
-const getProyect = async (req, res, next) => {
-  try {
-    const result = await pool.query(
-      "SELECT * FROM proyectos WHERE proyect_id = $1",
-      [req.params.id]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+  getProyect: async (req, res, next) => {
+    try {
+      const proyectData = await ProyectosService.getById(req.params.id);
+      if (!proyectData) {
+        return res.status(404).json({ message: "Proyecto no encontrado" });
+      }
+      const proyecto = new Proyectos(proyectData.id, proyectData.name, proyectData.description, proyectData.createby);
+      res.json(proyecto);
+    } catch (error) {
+      next(error);
+    }
+  },
 
-const createProyect = async (req, res, next) => {
-  try {
-    const result = await pool.query(
-      "INSERT INTO proyectos (name_proyect, proyect_description, create_by) VALUES ($1, $2,$3) RETURNING *",
-      [req.body.nombre, req.body.descripcion, req.body.createby]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre del proyecto ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
+  createProyect :async (req, res, next) => {
+    try {
+      const { name, description, createby } = req.body;
+      const newProyect = await Proyectos.createProyect(
+        name, description,createby
+      );
+      res.status(201).json(newProyect);
+    } catch (error) {
+      next(error);
+    }
+  },
+  
+
+  updateProyect: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const {name, description} = req.body;
+      const updateProyect = await ProyectosService.updateProyect(id,name,description);
+      if (!updateProyect){
+        return res.status(404).json({ message: "Proyecto no encontrado" })
+      }
+      res.json(updateProyect);
+    } catch (error) {
+      next(error);
     }
   }
 };
 
-const updateProyect = async (req, res, next) => {
-  try {
-    const result = await pool.query(
-      "UPDATE proyectos SET name_proyect = $1, proyect_description = $2 WHERE proyect_id = $3 RETURNING *",
-      [req.body.nombre, req.body.descripcion, req.params.id]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    if (err.constraint === "proyectos_nombre_key") {
-      res.status(400).json({ error: "El nombre del proyecto ya existe" });
-    } else {
-      res.status(500).json({ error: err.message });
-    }
-  }
-};
-module.exports = {
-  getAllproyect,
-  getProyect,
-  createProyect,
-  updateProyect,
-};
+module.exports = ProyectosController;
