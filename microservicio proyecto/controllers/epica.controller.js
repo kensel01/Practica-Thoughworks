@@ -1,12 +1,12 @@
 const EpicaService = require("../service/epica.service");
-const Epica = require("../service/epica.service");
+const Epica = require("../models/epica.model");
 
 const EpicController = {
   getAllepic: async (req, res, next) => {
     try {
       const epicData = await EpicaService.getAll();
       const epicas = epicData.map(
-        (pd) => new Proyecto(pd.id, pd.title, pd.description)
+        (pd) => new Epica(pd.id, pd.title, pd.description)
       );
       res.json(epicas);
     } catch (error) {

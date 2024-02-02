@@ -15,7 +15,7 @@ const EpicaService = {
 
   createEpic: async (title, description) => {
     const resutl = await pool.query(
-      "INSERT INTO epica (title, description) VALUES ($1,$2),RETURNING *",
+      "INSERT INTO epica (title, description) VALUES ($1,$2) RETURNING *",
       [title, description]
     );
     return resutl.rows[0];

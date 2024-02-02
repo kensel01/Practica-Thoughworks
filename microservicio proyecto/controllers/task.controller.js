@@ -1,5 +1,5 @@
 const TareaService = require("../service/tareas.service");
-const Tareas = require("../service/tareas.service");
+const Tareas = require("../models/tareas.model");
 
 const TareasController = {
   getAllTask: async (req, res, next) => {

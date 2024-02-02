@@ -1,4 +1,4 @@
-const Sprint = require("../service sprint.service");
+const Sprint = require("../models/sprint.model");
 const SprintService = require("../service/sprint.service");
 
 const SprintController = {
