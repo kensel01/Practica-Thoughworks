@@ -8,13 +8,14 @@ const {
   createTask,
   updateTask,
 } = require("../controllers/task.controller");
+// replicar para tareas spritns
 
-router.get("/proyect/:id/epics/:id/task", getAllTask);
+router.get("/proyect/:proyectId/epics/:epicId/task", getAllTask);
 
-router.get("/proyect/:id/epics/:id/task/:id", getTask);
+router.get("/proyect/:proyectId/epics/:epicId/task/:id", getTask);
 
-router.post("/proyect/:id/epics/:id/task", createTask);
+router.post("/proyect/:proyectId/epics/:epicId/task", createTask);
 
-router.put("/proyect/:id/epics/:id/task/:id", updateTask);
+router.put("/proyect/:proyectId/epics/:epicId/task/:id", updateTask);
 
 module.exports = router;

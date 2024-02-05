@@ -1,6 +1,7 @@
 const ProyectoService = require('../service/proyecto.service');
 const Proyecto= require('../models/proyecto.model');
 
+
 const ProyectosController = {
   getAllproyect: async (req, res, next) => {
     try {

@@ -6,5 +6,7 @@ class Proyectos {
         this.createby = createby;
     }
 }
+// funciones como por ej cambiar nombre 
+// 
 
 module.exports = Proyectos;

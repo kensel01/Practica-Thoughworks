@@ -15,7 +15,7 @@ const TareaService = {
 
   createTask: async (title, description, state, dateStart, dateEnd) => {
     const resutl = await pool.query(
-      "INSERT INTO tareas (task_title,task_description,task_state,date_start,date_end) VALUES ($1,$2,$3,$4),RETURNING *",
+      "INSERT INTO tareas (task_title,task_description,task_state,date_start,date_end) VALUES ($1,$2,$3,$4) RETURNING *",
       [title, description, state, dateStart, dateEnd]
     );
     return resutl.rows[0];
