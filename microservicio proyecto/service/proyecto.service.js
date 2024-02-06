@@ -3,7 +3,6 @@ const pool = require('../db');
 const ProyectoService = {
   getAll: async () => {
     const result = await pool.query('SELECT * FROM Proyectos');
-    console.log(JSON.stringify(result.rows, null, 2)); // Imprime en consola
     return result.rows;
   },
 

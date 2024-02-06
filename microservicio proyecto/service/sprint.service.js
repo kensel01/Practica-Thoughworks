@@ -16,7 +16,7 @@ const SprintService = {
 
   createSprint: async (name, duration, dateStart, dateEnd) => {
     const resutl = await pool.query(
-      "INSERT INTO sprint (sprint_name,duracion,date_start,date_end) VALUES ($1,$2,$3,$4),RETURNING *",
+      "INSERT INTO sprint (sprint_name,duracion,date_start,date_end) VALUES ($1,$2,$3,$4) RETURNING *",
       [name, duration, dateStart, dateEnd]
     );
     return resutl.rows[0];

@@ -18,7 +18,7 @@ const TareasController = {
   getTask: async (req, res, next) => {
     try {
       const taskData = await TareaService.getById(req.params.id);
-      if ( taskData) {
+      if (!taskData) {
         return res.status(404).json({ message: "Tarea  no encontrada" });
       }
       const tarea = new Tareas(
