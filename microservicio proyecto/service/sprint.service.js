@@ -24,7 +24,7 @@ const SprintService = {
 
   updateSprint: async (id, name, duration, dateStart, dateEnd) => {
     const result = await pool.query(
-      "UPDATE epica  SET sprint_name =$1, duracion = $2 date_start =$3,date_end=$4 WHERE sprint_id = $5 RETURNING *",
+      "UPDATE sprint  SET sprint_name =$1, duracion = $2, date_start =$3,date_end=$4 WHERE sprint_id = $5 RETURNING *",
       [id, name, duration, dateStart, dateEnd]
     );
     return result.rows[0];

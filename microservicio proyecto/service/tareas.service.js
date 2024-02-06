@@ -7,7 +7,7 @@ const TareaService = {
   },
 
   getById: async (id) => {
-    const result = await pool.query("SELECT * FROM sprint WHERE task_id =$1", [
+    const result = await pool.query("SELECT * FROM tareas WHERE task_id =$1", [
       id,
     ]);
     return result.rows[0];

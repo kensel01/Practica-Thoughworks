@@ -1,5 +1,7 @@
 const ProyectoService = require('../service/proyecto.service');
-const Proyecto= require('../models/proyecto.model');
+const Proyecto = require('../models/proyecto.model');
+const ColaboradoresService = require('../service/colaboradores.service');
+
 
 
 const ProyectosController = {
@@ -31,6 +33,10 @@ const ProyectosController = {
       const { name, description, createby } = req.body;
       const proyectData = await ProyectoService.create(name, description, createby);
       const newProyect = new Proyecto(proyectData.id, proyectData.name, proyectData.description, proyectData.createby);
+      const colaboradores = req.body.colaboradores; // Asume que recibes un array de colaboradores en el body
+      for (const col of colaboradores) {
+        await ColaboradoresService.create(newProyect.id, col.id_usuario, col.cargo, col.permisos_id);
+      }
       res.status(201).json(newProyect);
     } catch (error) {
       next(error);

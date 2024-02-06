@@ -16,7 +16,7 @@ const UserController = {
     }
     const match = await bcrypt.compare(user_password, user.user_password.trim());
     if (match) {
-      const token = jwt.sign({ user_id: user.user_id }, 'secretKey', { expiresIn: '1h' });
+      const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.json({ token });
     } else {
       res.status(400).json({ error: 'Contraseña incorrecta' });
