@@ -23,7 +23,7 @@ const TareaService = {
 
   updateTask: async (id, title, description, state, dateStart, dateEnd) => {
     const result = await pool.query(
-      "UPDATE tareas SET task_title =$1, task_description = $2 task_state =$3,date_start=$4 date_end= $5  WHERE task_id = $6 RETURNING *",
+      "UPDATE tareas SET task_title =$1, task_description = $2, task_state =$3,date_start=$4,date_end= $5  WHERE task_id = $6 RETURNING *",
       [id, title, description, state, dateStart, dateEnd]
     );
     return result.rows[0];
