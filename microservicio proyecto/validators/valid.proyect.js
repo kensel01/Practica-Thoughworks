@@ -13,3 +13,4 @@ const validateCreateProyect = [
     next();
   },
 ];
+module.exports = {validateCreateProyect};

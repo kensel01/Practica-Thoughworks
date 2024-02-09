@@ -7,8 +7,9 @@ const {
   createProyect,
   updateProyect,
 } = require("../controllers/proyect.controller");
-const {validateCreateProyect} = require("../validators/valid.proyect")
+
 const verificarPermisos = require("../middleware/permisos") 
+const {validateCreateProyect}= require("../validators/valid.proyect")
 
 // Authentication middleware
 const authMiddleware = require("../middleware/authMiddleware");
@@ -19,6 +20,6 @@ router.get("/proyect/:id", authMiddleware, getProyect);
 
 router.post("/proyect", authMiddleware,validateCreateProyect, createProyect);
 
-router.put("/proyect/:id", authMiddleware,validateCreateProyect,verificarPermisos, updateProyect);
+router.put("/proyect/:id", authMiddleware,verificarPermisos, updateProyect);
 
 module.exports = router;
