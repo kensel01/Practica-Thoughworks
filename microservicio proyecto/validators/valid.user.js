@@ -14,8 +14,6 @@ const validateRegister = [
   },
 ];
 
-const { body, validationResult } = require('express-validator');
-
 // Middleware de validación para el login de usuarios
 const validateLogin = [
   body('user_name').notEmpty().withMessage('El nombre de usuario es obligatorio'),

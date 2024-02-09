@@ -18,6 +18,6 @@ router.get("/proyect/:id", authMiddleware, getProyect);
 
 router.post("/proyect", authMiddleware,validateCreateProyect, createProyect);
 
-router.put("/proyect/:id", authMiddleware, updateProyect);
+router.put("/proyect/:id", authMiddleware,validateCreateProyect, updateProyect);
 
 module.exports = router;

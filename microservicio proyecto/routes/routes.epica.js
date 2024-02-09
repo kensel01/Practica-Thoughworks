@@ -14,6 +14,6 @@ router.get("/proyect/:proyect_id/epics/:id", getEpic);
 
 router.post("/proyect/:proyect_id/epics", createEpic);
 
-router.put("/proyect/:pryect_id/epics/:id", updateEpic);
+router.put("/proyect/:proyect_id/epics/:id", updateEpic);
 
 module.exports = router;
