@@ -4,8 +4,7 @@ const { body, validationResult } = require('express-validator');
 const validateCreateProyect = [
   body('nombre').notEmpty().withMessage('El nombre del proyecto es obligatorio'),
   body('descripcion').notEmpty().withMessage('La descripción del proyecto es obligatoria'),
-  body('fechaInicio').isDate().withMessage('La fecha de inicio debe ser una fecha válida'),
-  body('fechaFin').isDate().withMessage('La fecha de fin debe ser una fecha válida'),
+  body('CreateBy').notEmpty().withMessage('Debe indicar el creador del proyecto'),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
