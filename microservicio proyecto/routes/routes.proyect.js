@@ -23,3 +23,4 @@ router.post("/proyect", authMiddleware,validateCreateProyect, createProyect);
 router.put("/proyect/:id", authMiddleware,verificarPermisos, updateProyect);
 
 module.exports = router;
+//yo prueba
