@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import ProyectList from "./components/proyectList"
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,8 +23,7 @@ function App() {
             <Route exact path="/register">
               {!isAuthenticated ? <Register setAuth={setAuth} /> : <Redirect to="/login" />}
             </Route>
-            <Route  element ={<ProyectList/>} exact path="/dashboard"> 
-              
+            <Route exact path="/dashboard"> 
               {isAuthenticated ? <Dashboard setAuth={setAuth} /> : <Redirect to="/login" />}
               
             </Route>
