@@ -10,10 +10,10 @@ const UserService = {
     );
     return result.rows[0];
   },
-  findUserByName: async (user_name) => {
+  findUserByName: async (email) => {
     const result = await pool.query(
-      "SELECT * FROM Users WHERE user_name = $1",
-      [user_name]
+      "SELECT * FROM Users WHERE email = $1",
+      [email]
     );
     return result.rows[0];
   },

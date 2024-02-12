@@ -20,9 +20,9 @@ const validateRegister = [
 
 // Middleware de validación para el login de usuarios
 const validateLogin = [
-  body("user_name")
+  body("email")
     .notEmpty()
-    .withMessage("El nombre de usuario es obligatorio"),
+    .withMessage("El correo es obligatorio"),
   body("user_password").notEmpty().withMessage("La contraseña es obligatoria"),
   (req, res, next) => {
     const errors = validationResult(req);
