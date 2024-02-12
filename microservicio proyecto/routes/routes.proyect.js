@@ -14,12 +14,12 @@ const {validateCreateProyect}= require("../validators/valid.proyect")
 // Authentication middleware
 const authMiddleware = require("../middleware/authMiddleware");
 
-router.get("/proyect", authMiddleware, getAllproyect);
+router.get("/proyects", authMiddleware, getAllproyect);
 
-router.get("/proyect/:id", authMiddleware, getProyect);
+router.get("/proyects/:id", authMiddleware, getProyect);
 
-router.post("/proyect", authMiddleware,validateCreateProyect, createProyect);
+router.post("/proyects", authMiddleware,validateCreateProyect, createProyect);
 
-router.put("/proyect/:id", authMiddleware,verificarPermisos, updateProyect);
+router.put("/proyects/:id", authMiddleware,verificarPermisos, updateProyect);
 
 module.exports = router;

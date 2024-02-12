@@ -12,10 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(proyectRoutes);
+app.use("/proyects", verifyToken, proyectRoutes);
 app.use(epicsRoutes);
 app.use(taskRoutes);
-app.use( userRoutes);
+app.use(userRoutes);
 
 app.use((err, req, res, next) => {
   return res.json({

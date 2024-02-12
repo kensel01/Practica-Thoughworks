@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
+  let token = req.headers['authorization'];
   if (!token) {
     return res.status(403).send({ message: 'Se requiere un token para autenticación' });
+  }
+  // Extrae el token del formato "Bearer <token>"
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7, token.length);
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
