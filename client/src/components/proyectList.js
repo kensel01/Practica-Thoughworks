@@ -43,14 +43,14 @@ export default function ProyectList() {
 
   return (
     <>
-      <h1> Project List </h1>
-      {proyects.map((proyect) => (
+      <h1> Proyect List </h1>
+      {proyects.map((proyects) => (
         <Card
           style={{
             marginBottom: ".3rem",
             backgroundColor: "silver",
           }}
-          key={proyect.id}
+          key={proyects.id}
         >
           <CardContent
             style={{
@@ -59,15 +59,15 @@ export default function ProyectList() {
             }}
           >
             <div>
-              <Typography>{proyect.name}</Typography>
-              <Typography>{proyect.description}</Typography>
+              <Typography>{proyects.name}</Typography>
+              <Typography>{proyects.description}</Typography>
             </div>
 
             <div>
               <Button
                 variant="contained"
                 color="inherit"
-                onClick={() => navigate(`/proyect/${proyect.id}/edit`)}
+                onClick={() => navigate(`/proyect/${proyects.id}/edit`)}
               >
                 Edit
               </Button>

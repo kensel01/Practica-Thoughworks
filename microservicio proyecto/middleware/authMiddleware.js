@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(403).send({ message: 'Se requiere un token para autenticación' });
   }
-  // Extrae el token del formato "Bearer <token>"
+
   if (token.startsWith('Bearer ')) {
     token = token.slice(7, token.length);
   }

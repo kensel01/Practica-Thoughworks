@@ -8,6 +8,13 @@ const ColaboradoresService = {
     );
     return result.rows[0];
   },
+  getProyectByUser: async (id_usuario) => {
+    const result = await pool.query(
+      'SELECT p.* FROM Proyectos p JOIN Colaboradores c ON p.proyect_id = c.id_proyecto WHERE c.id_usuario = $1',
+      [id_usuario]
+    );
+    return result.rows;
+  },
 };
 
 module.exports = ColaboradoresService;
