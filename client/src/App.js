@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import './App.css';
 import Menu from "./components/Navbar";
 import {Container} from "@mui/material";
@@ -22,6 +22,13 @@ function App(){
     setIsAuthenticated(boolean);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   return <Fragment>
     <Router>
       <Menu />
@@ -33,8 +40,8 @@ function App(){
           <Route exact path="/register" render={props => !isAuthenticated ? (
           <Register {...props} setAuth={setAuth} /> ) : ( <Redirect to="/login" /> ) } />
 
-          <Route exact path="/dashboard" render={props => !isAuthenticated ? (
-          <Dashboard {...props} setAuth={setAuth} /> ) : ( <Redirect to="/login" /> ) } /> 
+          <Route exact path="/dashboard" render={props => isAuthenticated ? (
+          <Dashboard {...props} setAuth={setAuth} /> ) : ( <Redirect to="/login" /> ) } />  
 
           <Route path="/proyects/new" render={(props) => <ProyectForm {...props} />} />
 

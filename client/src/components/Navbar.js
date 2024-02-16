@@ -5,6 +5,11 @@ export default function Navbar() {
 
   const history = useHistory()
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    history.push('/login');
+  }
+
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position= 'static' color= 'transparent' >
@@ -20,6 +25,13 @@ export default function Navbar() {
             onClick={ () => history.push('/proyects/new')} 
             >
               New Proyect
+            </Button>
+            <Button 
+            variant="contained" 
+            color="secondary" 
+            onClick={handleLogout} 
+            >
+              Logout
             </Button>
           </Toolbar>
         </Container>
