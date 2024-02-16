@@ -13,7 +13,6 @@ require("dotenv").config()
 app.use(cors());
 app.use(express.json());
 
-// app.use("/proyects", verifyToken, proyectRoutes);
 app.use(proyectRoutes);
 app.use(epicsRoutes);
 app.use(taskRoutes);

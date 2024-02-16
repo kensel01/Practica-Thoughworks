@@ -6,6 +6,7 @@ const {
   getProyect,
   createProyect,
   updateProyect,
+  ProyectByUser,
 } = require("../controllers/proyect.controller");
 
 const verificarPermisos = require("../middleware/permisos") 
@@ -17,6 +18,8 @@ const authMiddleware = require("../middleware/authMiddleware");
 router.get("/proyects", authMiddleware, getAllproyect);
 
 router.get("/proyects/:id", authMiddleware, getProyect);
+
+router.get("/proyects/user/:id_usuario", authMiddleware, ProyectByUser);
 
 router.post("/proyects", authMiddleware,validateCreateProyect, createProyect);
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 
+import { jwtDecode } from 'jwt-decode';
+
 export default function ProyectList() {
   const [proyects, setProyects] = useState([]);
   const navigate = useHistory();
@@ -13,8 +15,9 @@ export default function ProyectList() {
         console.log("No token found");
         return;
       }
-
-      const response = await fetch("http://localhost:5000/proyects", {
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.user_id;
+      const response = await fetch(`http://localhost:5000/proyects/user/${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

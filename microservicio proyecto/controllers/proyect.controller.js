@@ -55,6 +55,18 @@ const ProyectosController = {
     } catch (error) {
       next(error);
     }
+  },
+  ProyectByUser: async (req, res, next) => {
+    try {
+      const proyectosData = await ColaboradoresService.getProyectByUser(req.params.id_usuario);
+      if (!proyectosData || proyectosData.length === 0) {
+        return res.json([]); // Changed to return an empty list if no projects are found
+      }
+      const proyectos = proyectosData.map(pd => new Proyecto(pd.id, pd.name, pd.description, pd.createby));
+      res.json(proyectos);
+    } catch (error) {
+      next(error);
+    }
   }
 };
 

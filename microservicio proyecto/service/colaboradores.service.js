@@ -10,7 +10,7 @@ const ColaboradoresService = {
   },
   getProyectByUser: async (id_usuario) => {
     const result = await pool.query(
-      'SELECT p.* FROM Proyectos p JOIN Colaboradores c ON p.proyect_id = c.id_proyecto WHERE c.id_usuario = $1',
+      'SELECT p.* FROM Proyectos p JOIN Colaboradores c ON p.proyect_id = c.id_proyect WHERE c.id_user = $1',
       [id_usuario]
     );
     return result.rows;
