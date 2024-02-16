@@ -7,6 +7,7 @@ const Login = ({ setAuth }) => {
         email:"",
         user_password:""
     })
+    const [errorMessage, setErrorMessage] = useState("");
 
     const {email, user_password} = inputs;
 
@@ -17,7 +18,6 @@ const Login = ({ setAuth }) => {
     const onSubmitForm = async(e) => {
         e.preventDefault()
         try {
-
             const body = {email, user_password }
 
             const response = await fetch("http://localhost:5000/login" , {
@@ -32,9 +32,13 @@ const Login = ({ setAuth }) => {
         if (response.ok && parseRes.token) {
              localStorage.setItem("token", parseRes.token);
             setAuth(true);
+        }
+        else{
+            setErrorMessage(parseRes.error);
         } 
         } catch (err) {
-            console.error(err.message)
+            console.error(err.message);
+            setErrorMessage(err.message);
         }
     }
     return (
@@ -57,6 +61,7 @@ const Login = ({ setAuth }) => {
                 value={user_password}
                 onChange={onChange}
                 />
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <button className="btn btn-success btn-block"> Submit </button>
             </form>
         <Link to="/register"> Register</Link>
