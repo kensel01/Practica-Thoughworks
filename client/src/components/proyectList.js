@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { jwtDecode } from 'jwt-decode';
 
-export default function ProyectList() {
+export default function ProyectList({ isAuthenticated }) {
   const [proyects, setProyects] = useState([]);
   const navigate = useHistory();
 
@@ -41,8 +41,10 @@ export default function ProyectList() {
   };
 
   useEffect(() => {
-    loadProyects();
-  }, []);
+    if (isAuthenticated) {
+      loadProyects();
+    }
+  }, [isAuthenticated]);
 
   return (
     <>

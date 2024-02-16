@@ -7,13 +7,14 @@ const {
   createEpic,
   updateEpic,
 } = require("../controllers/epica.controller");
+const verifyToken = require("../middleware/authMiddleware");
 
-router.get("/proyect/:proyect_id/epics", getAllepic);
+router.get("/proyect/:proyect_id/epics",verifyToken, getAllepic);
 
-router.get("/proyect/:proyect_id/epics/:id", getEpic);
+router.get("/proyect/:proyect_id/epics/:id",verifyToken, getEpic);
 
-router.post("/proyect/:proyect_id/epics", createEpic);
+router.post("/proyect/:proyect_id/epics",verifyToken, createEpic);
 
-router.put("/proyect/:proyect_id/epics/:id", updateEpic);
+router.put("/proyect/:proyect_id/epics/:id",verifyToken, updateEpic);
 
 module.exports = router;
