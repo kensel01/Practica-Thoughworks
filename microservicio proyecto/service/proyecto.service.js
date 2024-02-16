@@ -16,6 +16,7 @@ const ProyectoService = {
       'INSERT INTO Proyectos (name_proyect, proyect_description, create_by) VALUES ($1, $2, $3) RETURNING *',
       [name, descripcion, createby]
     );
+    
     return result.rows[0];
   },
 

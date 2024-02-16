@@ -19,7 +19,7 @@ app.use(taskRoutes);
 app.use(userRoutes);
 
 
-app.post("/authentication/verify", verifyToken);
+app.get("/authentication/verify", verifyToken);
 
 app.use((err, req, res, next) => {
   return res.json({

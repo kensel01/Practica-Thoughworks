@@ -32,11 +32,16 @@ const ProyectosController = {
     try {
       const { name, description, createby } = req.body;
       const proyectData = await ProyectoService.create(name, description, createby);
-      const newProyect = new Proyecto(proyectData.id, proyectData.name, proyectData.description, proyectData.createby);
-      const colaboradores = req.body.colaboradores; // Asume que recibes un array de colaboradores en el body
+      console.log(proyectData)
+      const newProyect = new Proyecto(proyectData.proyect_id, proyectData.name_proyect, proyectData.proyect_description, proyectData.create_by);
+      const colaboradores = req.body.colaboradores; 
+      console.log(colaboradores)
       for (const col of colaboradores) {
-        await ColaboradoresService.create(newProyect.id, col.id_usuario, col.cargo, col.permisos_id);
+        await ColaboradoresService.create(newProyect.id, col, "Invitado", 2);
       }
+
+      await ColaboradoresService.create(newProyect.id, newProyect.createby, "Admin", 1);
+      
       res.status(201).json(newProyect);
     } catch (error) {
       next(error);
@@ -60,10 +65,10 @@ const ProyectosController = {
     try {
       const proyectosData = await ColaboradoresService.getProyectByUser(req.params.id_usuario);
       if (!proyectosData || proyectosData.length === 0) {
-        return res.json([]); // Changed to return an empty list if no projects are found
+        return res.json([]); 
       }
-      const proyectos = proyectosData.map(pd => new Proyecto(pd.id, pd.name, pd.description, pd.createby));
-      res.json(proyectos);
+      res.json(proyectosData);
+      
     } catch (error) {
       next(error);
     }

@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
-
 import { jwtDecode } from 'jwt-decode';
 
 export default function ProyectList({ isAuthenticated }) {
   const [proyects, setProyects] = useState([]);
   const navigate = useHistory();
-
+  
   const loadProyects = async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         console.log("No token found");
         return;
-      }
+      }  
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.user_id;
       const response = await fetch(`http://localhost:5000/proyects/user/${userId}`, {
@@ -41,7 +40,7 @@ export default function ProyectList({ isAuthenticated }) {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated){
       loadProyects();
     }
   }, [isAuthenticated]);
@@ -49,14 +48,16 @@ export default function ProyectList({ isAuthenticated }) {
   return (
     <>
       <h1> Proyect List </h1>
+
       {proyects.map((proyects) => (
         <Card
           style={{
             marginBottom: ".3rem",
             backgroundColor: "silver",
           }}
-          key={proyects.id}
+          key={proyects.proyect_id}
         >
+          
           <CardContent
             style={{
               display: "flex",
@@ -64,8 +65,8 @@ export default function ProyectList({ isAuthenticated }) {
             }}
           >
             <div>
-              <Typography>{proyects.name}</Typography>
-              <Typography>{proyects.description}</Typography>
+              <Typography>{proyects.name_proyect}</Typography>
+              <Typography>{proyects.proyect_description}</Typography>
             </div>
 
             <div>

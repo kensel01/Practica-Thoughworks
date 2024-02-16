@@ -35,8 +35,11 @@ export default function ProyectForm() {
                 description: proyects.description,
                 createby: userId, 
                 colaboradores: proyects.colaboradores.split(',').map(id => id.trim()), 
+                
             }),
+            
         };
+        
 
         const url = editing ? `http://localhost:5000/proyects/${params.id}` : 'http://localhost:5000/proyects';
 
