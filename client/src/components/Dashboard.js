@@ -35,20 +35,38 @@ const Dashboard = ({ isAuthenticated }) => {
     }
   }, [isAuthenticated]);
   return (
-    <Box sx={{ bgcolor: 'white', height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ bgcolor: '#E1AFF7', color: 'white', padding: '8px', borderBottomRightRadius: '10px', borderBottomLeftRadius: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h5">Proyectos</Typography>
-        <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center' }}>
-          <CgProfile style={{ fontSize: '30px', marginRight: '8px', verticalAlign: 'middle' }} />
-          {userInfo.user_name}
-        </Typography>
-      </Box>
-      <Fragment>
-        <ProyectList isAuthenticated={isAuthenticated} />
-      </Fragment>
+    <Box sx={{ bgcolor: 'white', height: '100vh', display: 'flex', flexDirection: 'column', width: '80vw' }}>
+  <Box sx={{ position: 'relative', display: 'flex' }}>
+    <Box sx={{ 
+      bgcolor: '#6A0DAD',
+      width: '10px',
+      height: '100%',
+      position: 'absolute',
+      left: 0,
+    }} />
+    <Box sx={{ 
+      bgcolor: '#E1AFF7', 
+      color: 'white',
+      padding: '30px',
+      borderBottomRightRadius: '10px', 
+      borderBottomLeftRadius: '10px', 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center',
+      flex: 1
+    }}>
+      <Typography variant="h5">Proyectos</Typography>
+      <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center' }}>
+        <CgProfile style={{ fontSize: '30px', marginRight: '8px', verticalAlign: 'middle' }} />
+        {userInfo.user_name}
+      </Typography>
     </Box>
-  )//holi
-
+  </Box>
+  <Fragment>
+    <ProyectList isAuthenticated={isAuthenticated} />
+  </Fragment>
+</Box>
+  )
 }
 
 export default Dashboard;
