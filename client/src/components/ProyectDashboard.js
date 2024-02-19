@@ -57,7 +57,7 @@ const navigate = useHistory();
             <Button
               variant="contained"
               color="primary"
-              onClick={() => navigate.push(`/proyects/${id}/task/new`)}
+              onClick={() => navigate.push(`/proyects/${id}/epic/new`)}
             >
               Crear Epica
             </Button>
