@@ -59,7 +59,7 @@ const navigate = useHistory();
               color="primary"
               onClick={() => navigate.push(`/proyects/${id}/task/new`)}
             >
-              Añadir Tarea
+              Crear Epica
             </Button>
             </CardContent>
           </Card>

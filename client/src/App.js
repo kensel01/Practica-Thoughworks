@@ -16,7 +16,7 @@ import Dashboard from "./components/Dashboard";
 import ProyectForm from "./components/ProyectForm";
 import ProyectList from "./components/proyectList";
 import ProyectDashboard from "./components/ProyectDashboard";
-import TaskForm from "./components/TaskForm";
+import EpicForm from "./components/EpicForm";
 
 
 function App() {
@@ -67,7 +67,7 @@ function App() {
 
           <Route path="/proyects/:id" render={(props) => <ProyectDashboard {...props} />} />
 
-          <Route path="/proyects/:id/task/new" render={(props) => <TaskForm {...props} />} />
+          <Route path="/proyects/:id/epic/new" render={(props) => <EpicForm {...props} />} />
 
         </Container>
       </Switch>
