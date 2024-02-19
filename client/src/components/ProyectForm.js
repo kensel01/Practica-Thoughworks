@@ -78,9 +78,10 @@ export default function ProyectForm() {
             <Grid item xs={3}>
                 <Card sx={{ mt: 5 }} style={{
                     backgroundColor: '#9DB0CE',
-                    padding: '1rem'
+                    padding: '1rem',
+                    borderRadius: '10px'
                 }}>
-                    <Typography variant='5' textAlign='center' color='#535878'>
+                    <Typography variant='5' textAlign='center' color='white'>
                         {editing ? "Edit Proyects" : "Create Proyects"}
                     </Typography>
                     <CardContent>

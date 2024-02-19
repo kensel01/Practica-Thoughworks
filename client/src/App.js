@@ -15,6 +15,7 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import ProyectForm from "./components/ProyectForm";
 import ProyectList from "./components/proyectList";
+import ProyectDashboard from "./components/ProyectDashboard";
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
 
   return <Fragment>
     <Router>
-      <Menu setAuth={setAuth} />
+      {isAuthenticated && <Menu setAuth={setAuth} />}
       <Switch>
         <Container>
           <Route exact path="/" render={() => !isAuthenticated ? (<Redirect to="/login" />) : (<Redirect to="/dashboard" />)} />
@@ -63,6 +64,8 @@ function App() {
           <Route exact path="/proyects" render={props => isAuthenticated ? (
             <ProyectList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
+          <Route path="/proyects/:id" render={(props) => <ProyectDashboard {...props} />} />
+          
         </Container>
       </Switch>
     </Router>
