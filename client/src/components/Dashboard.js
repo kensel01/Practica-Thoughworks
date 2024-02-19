@@ -47,7 +47,7 @@ const Dashboard = ({ isAuthenticated }) => {
         <ProyectList isAuthenticated={isAuthenticated} />
       </Fragment>
     </Box>
-  )
+  )//holi
 
 }
 
