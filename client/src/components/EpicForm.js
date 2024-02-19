@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography } from '@mui/material'
 
@@ -9,10 +9,12 @@ const EpicForm = () => {
     title: '',
     description: '',
   });
-
+  
   const [loading, setLoading] = useState(false);
   const navigate = useHistory();
-
+  const path = navigate.location.pathname;
+  const pathtrim= path.trim('/').split('/');
+  const id_proyect = pathtrim[2];
   const handleSubmit = async (e)=> {
     e.preventDefault();
     setLoading(true);
@@ -29,18 +31,20 @@ const EpicForm = () => {
         'Authorization': token ? `Bearer ${token}`: '',
       },
       body: JSON.stringify({
+       proyect_id: id_proyect,
         title: epics.title,
-        description: epics.description,
-        user_id: userId,
+        description: epics.description
+
       }),
     };
-     const url = 'http://localhost:5000/proyect/:proyect_id/epics';
+
+     const url = `http://localhost:5000/proyect/${id_proyect}/epics`;
      try{
       const response = await fetch(url, requestOptions);
       if (!response.ok){
         throw new Error('Error al crear el epica');
       }
-      navigate.push('/proyects/:id_proyect');
+      navigate.push(`/proyects/${id_proyect}`);
       ;
       }
        catch (error) {
@@ -63,7 +67,8 @@ const EpicForm = () => {
   
 
   return (
-<Grid container direction="colum" alignItems="center" justifyContent="center">
+<Grid container direction="column" alignItems="center" justifyContent="center">
+        <div> </div>
             <Grid item xs={3}>
                 <Card sx={{ mt: 5 }} style={{
                     backgroundColor: '#9DB0CE',

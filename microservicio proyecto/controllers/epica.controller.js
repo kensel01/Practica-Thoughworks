@@ -31,9 +31,9 @@ const EpicController = {
   },
   createEpic: async (req, res, next) => {
     try {
-      const { title, description } = req.body;
-      const epicData = await EpicaService.createEpic(title, description);
-      const newepic = new Epica(epicData.title, epicData.description);
+      const { proyect_id, title, description } = req.body;
+      const epicData = await EpicaService.createEpic(proyect_id, title, description);
+      const newepic = new Epica(  epicData.proyect_id,epicData.title, epicData.description);
       res.status(201).json(newepic);
     } catch (error) {
       next(error);
