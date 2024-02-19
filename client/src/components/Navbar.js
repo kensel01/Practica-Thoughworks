@@ -12,31 +12,31 @@ export default function Navbar({ setAuth }) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position= 'static' color= 'transparent' >
-        <Container>
-          <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              <Link to="/dashboard" style={{ textDecoration:"none", color:"#black" }}> Proyectos ThoughWorks </Link>
-            </Typography>
+    <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="static" color="transparent">
+      <Toolbar>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Link to="/dashboard" style={{ textDecoration: "none", color: "#black" }}> Proyectos ThoughWorks </Link>
+        </Typography>
 
-            <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={ () => history.push('/proyects/new')} 
-            >
-              New Proyect
-            </Button>
-            <Button 
-            variant="contained" 
-            color="secondary" 
-            onClick={handleLogout} 
-            >
-              Logout
-            </Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
-  )
+        <Box sx={{ display: 'flex', gap: '1rem' }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push('/proyect/new')}
+          >
+            New Proyect
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  </Box>
+)
 }

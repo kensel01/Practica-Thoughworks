@@ -16,6 +16,7 @@ import Dashboard from "./components/Dashboard";
 import ProyectForm from "./components/ProyectForm";
 import ProyectList from "./components/proyectList";
 import ProyectDashboard from "./components/ProyectDashboard";
+import TaskForm from "./components/TaskForm";
 
 
 function App() {
@@ -59,13 +60,15 @@ function App() {
           <Route exact path="/dashboard" render={props => isAuthenticated ? (
             <Dashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/proyects/new" render={(props) => <ProyectForm {...props} />} />
+          <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
 
           <Route exact path="/proyects" render={props => isAuthenticated ? (
             <ProyectList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
           <Route path="/proyects/:id" render={(props) => <ProyectDashboard {...props} />} />
-          
+
+          <Route path="/proyects/:id/task/new" render={(props) => <TaskForm {...props} />} />
+
         </Container>
       </Switch>
     </Router>

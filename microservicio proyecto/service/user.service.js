@@ -21,6 +21,10 @@ const UserService = {
     const result = await pool.query("SELECT * FROM Users");
     return result.rows;
   },
+  getUser: async (user_id) => {
+    const result = await pool.query("SELECT * FROM Users WHERE user_id = $1", [user_id]);
+    return result.rows[0];
+  },
 
   updateUser: async (user_id, user_name, user_password, email) => {
     const result = await pool.query(

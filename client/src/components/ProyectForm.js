@@ -1,6 +1,6 @@
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography } from '@mui/material'
 import { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
 export default function ProyectForm() {
@@ -11,9 +11,8 @@ export default function ProyectForm() {
     });
 
     const [loading, setLoading] = useState(false);
-    const [editing, setEditing] = useState(false);
     const navigate = useHistory();
-    const params = useParams();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +24,7 @@ export default function ProyectForm() {
             userId = decodedToken.user_id; 
         }
         const requestOptions = {
-            method: editing ? 'PUT' : 'POST', 
+            method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': token ? `Bearer ${token}` : '', 
@@ -41,17 +40,17 @@ export default function ProyectForm() {
         };
         
 
-        const url = editing ? `http://localhost:5000/proyects/${params.id}` : 'http://localhost:5000/proyects';
+        const url = 'http://localhost:5000/proyects';
 
         try {
             const response = await fetch(url, requestOptions);
             if (!response.ok) {
-                throw new Error('Error al crear/editar el proyecto');
+                throw new Error('Error al crear el proyecto');
             }
             
             navigate.push('/dashboard'); 
         } catch (error) {
-            console.error('Error al crear/editar el proyecto:', error);
+            console.error('Error al crear el proyecto:', error);
         } finally {
             setLoading(false);
         }
@@ -60,18 +59,8 @@ export default function ProyectForm() {
     const handleChange = e =>
         setProyects({ ...proyects, [e.target.name]: e.target.value });
 
-    const loadProyects = async (id) => {
-        const res = await fetch(`http://localhost:5000/proyects/${params.id}`);
-        const data = await res.json()
-        setProyects({ name: data.name, description: data.description, create_by: data.create_by })
-        setEditing(true)
-    }
-
     useEffect(() => {
-        if (params.id) {
-            loadProyects(params.id);
-        }
-    }, [params.id]);
+    }, []);
 
     return (
         <Grid container direction="colum" alignItems="center" justifyContent="center">
@@ -82,7 +71,7 @@ export default function ProyectForm() {
                     borderRadius: '10px'
                 }}>
                     <Typography variant='5' textAlign='center' color='white'>
-                        {editing ? "Edit Proyects" : "Create Proyects"}
+                        {"Create Proyects"}
                     </Typography>
                     <CardContent>
                         <form onSubmit={handleSubmit}>

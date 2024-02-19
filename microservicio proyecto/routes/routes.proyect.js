@@ -17,12 +17,12 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 router.get("/proyects", authMiddleware, getAllproyect);
 
-router.get("/proyects/:id", authMiddleware, getProyect);
+router.get("/proyects/:proyect_id", authMiddleware, getProyect);
 
 router.get("/proyects/user/:id_usuario", authMiddleware, ProyectByUser);
 
 router.post("/proyects", authMiddleware,validateCreateProyect, createProyect);
 
-router.put("/proyects/:id", authMiddleware,verificarPermisos, updateProyect);
+router.put("/proyects/:proyect_id", authMiddleware,verificarPermisos, updateProyect);
 
 module.exports = router;

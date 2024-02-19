@@ -17,12 +17,12 @@ const ProyectosController = {
 
   getProyect: async (req, res, next) => {
     try {
-      const proyectData = await ProyectoService.getById(req.params.id);
+      const proyectData = await ProyectoService.getById(req.params.proyect_id);
       if (!proyectData) {
         return res.status(404).json({ message: "Proyecto no encontrado" });
       }
       const proyecto = new Proyecto(proyectData.id, proyectData.name, proyectData.description, proyectData.createby);
-      res.json(proyecto);
+      res.json(proyectData);
     } catch (error) {
       next(error);
     }

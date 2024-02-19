@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
@@ -57,7 +57,7 @@ export default function ProyectList({ isAuthenticated }) {
             cursor: 'pointer'
           }}
           key={proyects.proyect_id}
-          onClick ={() => navigate.push(`/proyect/${proyects.proyect_id}`)}
+          onClick ={() => navigate.push(`/proyects/${proyects.proyect_id}`)}
         >
 
           <CardContent
@@ -71,15 +71,6 @@ export default function ProyectList({ isAuthenticated }) {
               <Typography style={{ color: 'white' }}>{proyects.proyect_description}</Typography>
             </div>
 
-            <div>
-              <Button
-                variant="contained"
-                color="inherit"
-                onClick={() => navigate(`/proyect/${proyects.id}/edit`)}
-              >
-                Edit
-              </Button>
-            </div>
           </CardContent>
         </Card>
       ))}

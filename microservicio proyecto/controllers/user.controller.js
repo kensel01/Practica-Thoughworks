@@ -26,7 +26,11 @@ const UserController = {
     } else {
       res.status(400).json({ error: 'Contraseña incorrecta' });
     }
-  }
+  },
+  getUser: async (req, res) => {
+    const user = await UserService.getUser(req.params.user_id);
+    res.json(user);
+  },
 };
 
 module.exports = UserController;
