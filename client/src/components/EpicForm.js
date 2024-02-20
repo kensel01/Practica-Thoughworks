@@ -1,7 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
-import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography } from '@mui/material'
+import React, {  useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close';
 
 
 const EpicForm = () => {
@@ -12,18 +12,18 @@ const EpicForm = () => {
   
   const [loading, setLoading] = useState(false);
   const navigate = useHistory();
+
+
   const path = navigate.location.pathname;
   const pathtrim= path.trim('/').split('/');
   const id_proyect = pathtrim[2];
+
+
   const handleSubmit = async (e)=> {
     e.preventDefault();
     setLoading(true);
     const token = localStorage.getItem('token');
-    let userId;
-    if (token){
-      const decodedToken = jwtDecode(token);
-      userId = decodedToken.user_id;
-    }
+   
     const requestOptions = {
       method: 'POST',
       headers:{
@@ -70,11 +70,23 @@ const EpicForm = () => {
 <Grid container direction="column" alignItems="center" justifyContent="center">
         <div> </div>
             <Grid item xs={3}>
-                <Card sx={{ mt: 5 }} style={{
+                <Card sx={{ mt: 5, position: 'relative' }} style={{
                     backgroundColor: '#9DB0CE',
                     padding: '1rem',
                     borderRadius: '10px'
                 }}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={() => navigate.push(`/proyects/${id_proyect}`)}
+                        style={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: 'white',
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                     <Typography variant='5' textAlign='center' color='white'>
                         {"Create Epic"}
                     </Typography>

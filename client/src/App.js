@@ -67,7 +67,7 @@ function App() {
 
           <Route path="/proyects/:id" render={(props) => <ProyectDashboard {...props} />} />
 
-          <Route path="/proyects/:id/epic/new" render={(props) => <EpicForm {...props} />} />
+          <Route path="/proyect/:id/epic/new" render={(props) => <EpicForm {...props} />} />
 
         </Container>
       </Switch>

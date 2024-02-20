@@ -1,7 +1,8 @@
-import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography } from '@mui/material'
+import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ProyectForm() {
     const [proyects, setProyects] = useState({
@@ -65,11 +66,23 @@ export default function ProyectForm() {
     return (
         <Grid container direction="colum" alignItems="center" justifyContent="center">
             <Grid item xs={3}>
-                <Card sx={{ mt: 5 }} style={{
+                <Card sx={{ mt: 5, position: 'relative' }} style={{
                     backgroundColor: '#9DB0CE',
                     padding: '1rem',
                     borderRadius: '10px'
                 }}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={() => navigate.push('/dashboard')}
+                        style={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: 'white',
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                     <Typography variant='5' textAlign='center' color='white'>
                         {"Create Proyects"}
                     </Typography>

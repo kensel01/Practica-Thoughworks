@@ -37,7 +37,11 @@ const navigate = useHistory();
         {proyect && (
           <Card
             style={{
-              marginBottom: ".3rem",
+              width: '25%',
+              position: 'absolute',
+              left: 0,
+              top: '64px', 
+              height: 'calc(100vh - 64px)', 
               backgroundColor: '#9DB0CE',
               cursor: 'pointer'
             }}
@@ -47,7 +51,9 @@ const navigate = useHistory();
             <CardContent
               style={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "space-between",
+                height: '100%'
               }}
             >
               <div>
@@ -57,7 +63,11 @@ const navigate = useHistory();
             <Button
               variant="contained"
               color="primary"
-              onClick={() => navigate.push(`/proyects/${id}/epic/new`)}
+              style={{
+                alignSelf: 'flex-end',
+                marginTop: 'auto'
+              }}
+              onClick={() => navigate.push(`/proyect/${id}/epic/new`)}
             >
               Crear Epica
             </Button>

@@ -1,9 +1,10 @@
-import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material"
-import { Link, useHistory } from 'react-router-dom'
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 export default function Navbar({ setAuth }) {
 
   const history = useHistory()
+  const location = useLocation()
 
   const handleLogout = () => {
     localStorage.removeItem("token");
