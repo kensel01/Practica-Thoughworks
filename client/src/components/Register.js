@@ -1,7 +1,13 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import './styles/Login.css';
+import { MdOutlineEngineering } from "react-icons/md";
+import { IoIosMail } from "react-icons/io";
+import { FaLock } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 
 const Register = ({ setAuth }) => {
+  const navigate = useHistory();
   const [inputs, setInputs] = useState({
     email: "",
     user_password: "",
@@ -39,37 +45,47 @@ const Register = ({ setAuth }) => {
   };
 
   return (
-    <Fragment>
-      <h1 className="text-center my-5">Register</h1>
+    <div className="wrapper">
       <form onSubmit={onSubmitForm}>
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          className="form-control my-3"
-          value={inputs.email}
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          name="user_password"
-          placeholder="password"
-          className="form-control my-3"
-          value={inputs.user_password}
-          onChange={onChange}
-        />
-        <input
-          type="text"
-          name="user_name"
-          placeholder="name"
-          className="form-control my-3"
-          value={inputs.user_name}
-          onChange={onChange}
-        />
-        <button className="btn btn-success btn-block">Submit</button>
+        <h1> Registro <MdOutlineEngineering /></h1>
+        <div className="input-box">
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              value={inputs.email}
+              onChange={onChange}
+            />
+            <IoIosMail className="icon" />
+          </div>
+        <div className="input-box">
+            <input
+              type="password"
+              name="user_password"
+              placeholder="password"
+              value={inputs.user_password}
+              onChange={onChange}
+            />
+            <FaLock className="icon" />
+        </div>
+        <div className="input-box">
+            <input
+                type="text"
+                name="user_name"
+                placeholder="name"
+                value={inputs.user_name}
+                onChange={onChange}
+              />
+              <FaUserEdit className="icon"/>
+        </div>
+
+        <button className="btn btn-success btn-block"> Registrate </button>
       </form>
-      <Link to="/login"> Login </Link>
-    </Fragment>
+      <div className="register-link">
+                <p> Ya tienes cuenta? <a href="#" onClick={() => navigate.push('/login')}
+                > Login </a></p>
+            </div>
+      </div>
   );
 };
 

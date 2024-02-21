@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import './styles/Login.css';
 import { MdOutlineEngineering } from "react-icons/md";
 import { IoIosMail } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 
 const Login = ({ setAuth }) => {
-
+    const navigate = useHistory();
     const [inputs,setInputs] = useState({
         email:"",
         user_password:""
@@ -72,16 +72,17 @@ const Login = ({ setAuth }) => {
 
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-                <div className="remember-forgot">
+                {/* <div className="remember-forgot">
                     <label><input type="checkbox"/> Remember me </label>
                     <a href="#" > Forgot password? </a>
-                </div>
+                  </div>      */} 
 
                 <button className="btn btn-success btn-block"> Login </button>
 
             </form>
             <div className="register-link">
-                <p> No recuerdas la cuenta? <a href="#"> Register </a></p>
+                <p> No tienes cuenta? <a href="#" onClick={() => navigate.push('/register')}
+                > Register </a></p>
             </div>
         </div>
     );
