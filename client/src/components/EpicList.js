@@ -30,7 +30,6 @@ export default function EpicList ({isAuthenticated}){
            console.log("Respuesta OK:", response.ok, "Respuesta del servidor:", parseRes);
            if (response.ok && Array.isArray(parseRes)){
                setEpics(parseRes);
-               console.log("Epics loaded successfully:", parseRes); // Added console.log to check data
            }else{
             console.error("Error en la respuesta del servidor:", parseRes);
             setEpics([]);
@@ -43,7 +42,6 @@ export default function EpicList ({isAuthenticated}){
 
     useEffect(()=>{
         if(isAuthenticated){
-            console.log("isAuthenticated is true, loading epics..."); // Added console.log to check process
             loadEpics();
         }
     }, [isAuthenticated]); 
@@ -52,14 +50,15 @@ export default function EpicList ({isAuthenticated}){
       <>
         <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Epics </h1>
 
-        {epics.map((epics) => (
+        {epics.map((epic) => (
           <Card
             style={{
               marginBottom: ".3rem",
               backgroundColor: '#9DB0CE',
               cursor: 'pointer'
             }}
-            key={epics.epica_id}
+            key={epic.epica_id}
+            onClick={() => navigate.push(`/epic/${epic.epica_id}`)}
           >
   
             <CardContent
@@ -69,8 +68,8 @@ export default function EpicList ({isAuthenticated}){
               }}
             >
               <div>
-                <Typography style={{ color: 'white' }}>{epics.title}</Typography>
-                <Typography style={{ color: 'white' }}>{epics.description}</Typography>
+                <Typography style={{ color: 'white' }}>{epic.title}</Typography>
+                <Typography style={{ color: 'white' }}>{epic.description}</Typography>
               </div>
   
             </CardContent>
