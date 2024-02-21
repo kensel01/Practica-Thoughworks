@@ -6,10 +6,11 @@ const {
   getEpic,
   createEpic,
   updateEpic,
+  getEpicsByProjectId
 } = require("../controllers/epica.controller");
 const verifyToken = require("../middleware/authMiddleware");
 
-router.get("/proyect/:proyect_id/epics",verifyToken, getAllepic);
+router.get("/proyect/:proyect_id/epics",verifyToken, getEpicsByProjectId);
 
 router.get("/proyect/:proyect_id/epics/:id",verifyToken, getEpic);
 

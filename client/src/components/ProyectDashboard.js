@@ -1,15 +1,16 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
-import { useParams,useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import EpicList from "./EpicList";
 
-
-
-const ProyectDashboard= ()=> {
+const ProyectDashboard= ({ isAuthenticated })=> { 
     const { id } = useParams();
     const [proyect, setProyect] = useState(null);
 
     useEffect(() => {
+      if (isAuthenticated) {
         loadproyect();
+      }
     }, [id]);
 
 const loadproyect= async()=>{
@@ -34,46 +35,49 @@ const navigate = useHistory();
     return (
       <Fragment>
         <h1 style={{color: '#535878'}}>Proyecto{id}</h1>
-        {proyect && (
-          <Card
-            style={{
-              width: '25%',
-              position: 'absolute',
-              left: 0,
-              top: '64px', 
-              height: 'calc(100vh - 64px)', 
-              backgroundColor: '#9DB0CE',
-              cursor: 'pointer'
-            }}
-            key={proyect.proyect_id}
-          >
+        <div style={{ display: 'flex', width: '100%' }}>
+          {proyect && (
+            <Card
+              style={{
+                width: '25%',
+                position: 'relative',
+                height: 'calc(100vh - 64px)', 
+                backgroundColor: '#9DB0CE',
+                cursor: 'pointer'
+              }}
+              key={proyect.proyect_id}
+            >
 
-            <CardContent
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: '100%'
-              }}
-            >
-              <div>
-                <Typography style={{ color: 'white' }}>{proyect.name_proyect}</Typography>
-                <Typography style={{ color: 'white' }}>{proyect.proyect_description}</Typography>
-              </div>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{
-                alignSelf: 'flex-end',
-                marginTop: 'auto'
-              }}
-              onClick={() => navigate.push(`/proyect/${id}/epic/new`)}
-            >
-              Crear Epica
-            </Button>
-            </CardContent>
-          </Card>
-        )}
+              <CardContent
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: '100%'
+                }}
+              >
+                <div>
+                  <Typography style={{ color: 'white' }}>{proyect.name_proyect}</Typography>
+                  <Typography style={{ color: 'white' }}>{proyect.proyect_description}</Typography>
+                </div>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  alignSelf: 'flex-end',
+                  marginTop: 'auto'
+                }}
+                onClick={() => navigate.push(`/proyect/${id}/epic/new`)}
+              >
+                Crear Epica
+              </Button>
+              </CardContent>
+            </Card>
+          )}
+          <div style={{ width: '75%', overflowY: 'auto' }}>
+            <EpicList proyectId={id} isAuthenticated={isAuthenticated} /> 
+          </div>
+        </div>
       </Fragment>
     )
   }

@@ -60,6 +60,17 @@ const EpicController = {
       next(error);
     }
   },
+  getEpicsByProjectId: async (req, res, next) => {
+    try {
+      const epicData = await EpicaService.getByProjectId(req.params.proyect_id);
+      const epicas = epicData.map(
+        (pd) => new Epica(pd.id, pd.title, pd.description)
+      );
+      res.json(epicData);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = EpicController;

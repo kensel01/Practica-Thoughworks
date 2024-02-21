@@ -28,5 +28,13 @@ const EpicaService = {
     );
     return result.rows[0];
   },
+
+  getByProjectId: async (proyect_id) => {
+    const result = await pool.query("SELECT * FROM epica WHERE proyect_id = $1", [
+      proyect_id,
+    ]);
+    return result.rows;
+  },
 };
 module.exports = EpicaService;
+

@@ -65,9 +65,11 @@ function App() {
           <Route exact path="/proyects" render={props => isAuthenticated ? (
             <ProyectList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/proyects/:id" render={(props) => <ProyectDashboard {...props} />} />
+          <Route path="/proyects/:id" render={props => isAuthenticated ? (
+            <ProyectDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/proyect/:id/epic/new" render={(props) => <EpicForm {...props} />} />
+          <Route path="/proyect/:id/epic/new" render={props => isAuthenticated ? (
+            <EpicForm {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
         </Container>
       </Switch>
