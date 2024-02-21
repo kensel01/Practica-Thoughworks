@@ -1,5 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import './styles/Login.css';
+import { MdOutlineEngineering } from "react-icons/md";
+import { IoIosMail } from "react-icons/io";
+import { FaLock } from "react-icons/fa";
 
 const Login = ({ setAuth }) => {
 
@@ -42,30 +46,44 @@ const Login = ({ setAuth }) => {
         }
     }
     return (
-        <Fragment>
-            <h1 className="text-center my-5"> Login </h1>
+        <div className="wrapper">
             <form onSubmit={onSubmitForm}>
-                <input 
-                type="email" 
-                name="email" 
-                placeholder="email" 
-                className="form-control my-3"
-                value={email}
-                onChange={onChange}
-                />
-                <input 
-                type="password" 
-                name="user_password" 
-                placeholder="password" 
-                className="form-control my-3"
-                value={user_password}
-                onChange={onChange}
-                />
+                <h1> Login <MdOutlineEngineering /></h1>
+                <div className="input-box">
+                    <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="email" 
+                    value={email}
+                    onChange={onChange}
+                    /> 
+                    <IoIosMail className="icon" />
+                </div>
+                <div className="input-box">
+                    <input 
+                    type="password" 
+                    name="user_password" 
+                    placeholder="password" 
+                    value={user_password}
+                    onChange={onChange}
+                    />
+                    <FaLock className="icon" />
+                </div>
+
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <button className="btn btn-success btn-block"> Submit </button>
+
+                <div className="remember-forgot">
+                    <label><input type="checkbox"/> Remember me </label>
+                    <a href="#" > Forgot password? </a>
+                </div>
+
+                <button className="btn btn-success btn-block"> Login </button>
+
             </form>
-        <Link to="/register"> Register</Link>
-        </Fragment>
+            <div className="register-link">
+                <p> No recuerdas la cuenta? <a href="#"> Register </a></p>
+            </div>
+        </div>
     );
 }
 
