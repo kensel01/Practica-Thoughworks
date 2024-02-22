@@ -4,7 +4,11 @@ import { Button, Card, CardContent, Typography } from "@mui/material";
 
 const EpicDashboard = ({isAuthenticated}) => {
     const [epic, setEpic] = useState(null);
-    const { epic_id } = useParams();
+    const navigate = useHistory();
+
+    const path = navigate.location.pathname;
+    const pathtrim= path.trim('/').split('/');
+    const epic_id = pathtrim[2];
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -13,7 +17,7 @@ const EpicDashboard = ({isAuthenticated}) => {
     }, [isAuthenticated, epic_id]);
     const loadEpic = async () => {
         const token = localStorage.getItem('token')
-        const response = await fetch(`http://localhost:5000/proyect/:proyect_id/epics/${epic_id}`, {
+        const response = await fetch(`http://localhost:5000/epics/${epic_id}`, {
             method: "GET",
             headers: { 
                 "Content-Type": "application/json",
@@ -28,7 +32,6 @@ const EpicDashboard = ({isAuthenticated}) => {
         setEpic(data);
     }
 
-    const navigate = useHistory();
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
