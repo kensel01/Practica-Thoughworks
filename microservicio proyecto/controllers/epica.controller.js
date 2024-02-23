@@ -24,7 +24,7 @@ const EpicController = {
         epicData.title,
         epicData.description
       );
-      res.json(epica);
+      res.json(epicData);
     } catch (error) {
       next(error);
     }
