@@ -58,7 +58,7 @@ function App() {
             <Register {...props} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
 
           <Route exact path="/dashboard" render={props => isAuthenticated ? (
-            <Dashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+            <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth}/>) : (<Redirect to="/login" />)} />
 
           <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
 

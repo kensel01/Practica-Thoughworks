@@ -28,13 +28,6 @@ export default function Navbar({ setAuth }) {
           >
             New Proyect
           </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
         </Box>
       </Toolbar>
     </AppBar>
