@@ -6,10 +6,11 @@ const {
   getTask,
   createTask,
   updateTask,
+  getTasksByEpicId
 } = require("../controllers/task.controller");
 const verifyToken = require("../middleware/authMiddleware");
 
-router.get("/proyect/:proyectId/epics/:epicId/task",verifyToken, getAllTask);
+router.get("/proyect/:proyectId/epics/:epicId/task",verifyToken, getTasksByEpicId);
 router.get("/proyect/:proyectId/sprint/:sprint_Id/task",verifyToken, getAllTask);
 
 router.get("/proyect/:proyectId/epics/:epicId/task/:id",verifyToken, getTask);

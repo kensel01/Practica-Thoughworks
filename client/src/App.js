@@ -76,7 +76,7 @@ function App() {
           <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
             <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/proyect/:proyectId/epic/:epicId/tasks" render={props => isAuthenticated ? (
+          <Route path="/proyect/:id_pryect/epic/:id_epic/tasks" render={props => isAuthenticated ? (
             <TaskList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
           <Route path="/proyect/:id_proyect/epic/:id_epic/task/new" render={props => isAuthenticated ? (

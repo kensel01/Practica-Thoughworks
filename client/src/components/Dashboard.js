@@ -130,19 +130,21 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
       </nav>
 
       <Box sx={{ position: 'fixed',
-        top: 90,
-        left: 350,
+        top: '90px',
+        left: '350px',
         width: '800px',
-        height: '100%',
+        maxHeight: 'calc(100% - 90px)',
         backgroundColor: 'transparent',
         backdropFilter: 'blur(40px)',
         borderRight: '2px solid rgba(255, 255, 255, .2)',
         boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-        padding: '6px 14px',color: 'white' }}>
+        padding: '6px 14px',
+        color: 'white',
+        overflowY: 'auto' }}> 
         <Typography variant="h5">Proyectos</Typography>
-        <Fragment>
+        <div>
           <ProyectList isAuthenticated={isAuthenticated} />
-        </Fragment>
+        </div>
       </Box>
     </Box>
   );

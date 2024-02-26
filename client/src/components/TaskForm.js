@@ -36,10 +36,9 @@ const TaskForm = () => {
         'Authorization': token ? `Bearer ${token}`: '',
       },
       body: JSON.stringify({
-       proyect_id: id_proyect,
-        title: task.title,
-        description: task.description,
-        state: task.state,
+        task_title: task.title,
+        task_description: task.description,
+        task_state: task.state,
         date_start: task.date_start,
         date_end: task.date_end
 
