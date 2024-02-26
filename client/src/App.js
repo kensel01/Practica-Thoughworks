@@ -60,7 +60,7 @@ function App() {
             <Register {...props} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
 
           <Route exact path="/dashboard" render={props => isAuthenticated ? (
-            <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth}/>) : (<Redirect to="/login" />)} />
+            <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
 
           <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
 
@@ -76,12 +76,12 @@ function App() {
           <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
             <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path= "/proyect/:proyectId/epic/:epicId/tasks" render={props => isAuthenticated ? (
+          <Route path="/proyect/:proyectId/epic/:epicId/tasks" render={props => isAuthenticated ? (
             <TaskList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/create-task" render={props => isAuthenticated ? (
-            <TaskForm {...props} isAuthenticated={isAuthenticated}/>): (<Redirect to ="/login" />)}/>
-          
+          <Route path="/proyect/:id_proyect/epic/:id_epic/task/new" render={props => isAuthenticated ? (
+            <TaskForm {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+
 
         </Container>
       </Switch>

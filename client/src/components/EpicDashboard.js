@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button, Card, CardContent, Typography } from "@mui/material";
+import TaskList from './TaskList';
 
 const EpicDashboard = ({ isAuthenticated }) => {
     const [epic, setEpic] = useState(null);
@@ -56,9 +57,10 @@ const EpicDashboard = ({ isAuthenticated }) => {
                         </>
                     )}
                     
-                    <Button variant="contained" color="primary" onClick={() => navigate.push('/create-task')}>
+                    <Button variant="contained" color="primary" onClick={() => navigate.push(`/proyect/${id_proyect}/epic/${id_epic}/task/new`)}>
                         Create Task
                     </Button>
+                    <TaskList isAuthenticated={isAuthenticated} proyectId={id_proyect} epicId={id_epic} />
                 </CardContent>
             </Card>
         </div>

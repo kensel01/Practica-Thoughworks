@@ -2,11 +2,12 @@ import React, {  useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import { useParams } from 'react-router-dom/cjs/react-router-dom';
 
 
 
-const EpicForm = () => {
-  const [epics, setEpics] = useState({
+const TaskForm = () => {
+  const [task, setTask] = useState({
     title: '',
     description: '',
     state:'',
@@ -19,9 +20,8 @@ const EpicForm = () => {
   const navigate = useHistory();
 
 
-  const path = navigate.location.pathname;
-  const pathtrim= path.trim('/').split('/');
-  const id_proyect = pathtrim[2];
+ const {id_proyect}= useParams();
+ const {id_epic}= useParams();
 
 
   const handleSubmit = async (e)=> {
@@ -37,23 +37,25 @@ const EpicForm = () => {
       },
       body: JSON.stringify({
        proyect_id: id_proyect,
-        title: epics.title,
-        description: epics.description
+        title: task.title,
+        description: task.description,
+        state: task.state,
+        date_start: task.date_start,
+        date_end: task.date_end
 
       }),
     };
 
-     const url = `http://localhost:5000/proyect/${id_proyect}/epics/${epica_id}/task`;
+     const url = `http://localhost:5000/proyect/${id_proyect}/epics/${id_epic}/task`;
      try{
       const response = await fetch(url, requestOptions);
       if (!response.ok){
         throw new Error('Error al crear tarea');
       }
       navigate.push(`/proyects/${id_proyect}`);
-      ;
       }
        catch (error) {
-       console.error('Errir ak crear tarea',error);
+       console.error('Error al crear tarea',error);
      } finally {
       setLoading(false);
      }
@@ -61,8 +63,8 @@ const EpicForm = () => {
   };
 
   const handleChange = e =>
-    setEpics({
-      ...epics,
+    setTask({
+      ...task,
       [e.target.name]: e.target.value,
     });
   useEffect(() => {
@@ -131,8 +133,6 @@ const EpicForm = () => {
                             <TextField
                                 variant='filled'
                                 label='Write your state'
-                                multiline
-                                rows={4}
                                 sx={{
                                     display: 'block',
                                     margin: '.5rem 0'
@@ -147,14 +147,13 @@ const EpicForm = () => {
                             <TextField
                                 variant='filled'
                                 label='Write your date start'
-                                multiline
-                                rows={4}
+                                type="date"
                                 sx={{
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
-                                name="date"
-                                value={date.start}
+                                name="date_start"
+                                value={task.date_start}
                                 onChange={handleChange}
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
@@ -163,21 +162,19 @@ const EpicForm = () => {
                             <TextField
                                 variant='filled'
                                 label='Write your date end'
-                                multiline
-                                rows={4}
+                                type="date"
                                 sx={{
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
-                                name="date"
-                                value={date.end}
+                                name="date_end"
+                                value={task.date_end}
                                 onChange={handleChange}
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
                             />
 
-                            <Button variant='contained' color='primary' type='submit' disabled={!task.title || !task.description || !task.state || date.start ||
-                                        date.end}>
+                            <Button variant='contained' color='primary' type='submit' disabled={!task.title || !task.description || !task.state || !task.date_start || !task.date_end}>
                                 {loading ? (
                                     <CircularProgress
                                         color="inherit" size={24} />
@@ -194,4 +191,4 @@ const EpicForm = () => {
     );
 }
 
-export default EpicForm;
+export default TaskForm;

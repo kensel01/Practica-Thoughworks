@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import {Card} from '@material-ui/core/Card';
-import {CardContent} from '@material-ui/core/CardContent';
-import {Typography} from '@material-ui/core/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 export default function TaskList({ isAuthenticated }) {
     const [tasks, setTasks] = useState([]);
