@@ -12,7 +12,7 @@ const verifyToken = require("../middleware/authMiddleware");
 
 router.get("/proyect/:proyect_id/epics",verifyToken, getEpicsByProjectId);
 
-router.get("/epics/:id",verifyToken, getEpic);
+router.get("/proyect/:proyect_id/epics/:id",verifyToken, getEpic);
 
 router.post("/proyect/:proyect_id/epics",verifyToken, createEpic);
 

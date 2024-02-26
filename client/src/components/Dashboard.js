@@ -91,7 +91,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
           </li>
 
           <li className="list-item">
-            <a href="#">
+            <a onClick={()=> history.push('/tasks')}>
               <i className="bx bx-grid-alt">
                 <FaTasks />
               </i>
@@ -100,7 +100,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
           </li>
 
           <li className="list-item">
-            <a href="#">
+            <a href="#" >
             <i className="bx bx-grid-alt">
               <AiOutlinePicCenter />
               </i>

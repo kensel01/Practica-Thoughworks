@@ -1,5 +1,5 @@
 import React, {  useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -12,12 +12,10 @@ const EpicForm = () => {
   
   const [loading, setLoading] = useState(false);
   const navigate = useHistory();
+  const {id_proyect} = useParams();
 
 
-  const path = navigate.location.pathname;
-  const pathtrim= path.trim('/').split('/');
-  const id_proyect = pathtrim[2];
-
+  
 
   const handleSubmit = async (e)=> {
     e.preventDefault();

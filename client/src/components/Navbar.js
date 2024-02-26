@@ -4,13 +4,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 export default function Navbar({ setAuth }) {
 
   const history = useHistory()
-  const location = useLocation()
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setAuth(false);
-    history.push('/login');
-  }
+ 
 
   return (
     <Box sx={{ flexGrow: 1 }}>
