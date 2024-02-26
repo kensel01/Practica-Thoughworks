@@ -91,7 +91,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
           </li>
 
           <li className="list-item">
-            <a onClick={()=> history.push('/tasks')}>
+            <a onClick={()=> history.push('/proyect/:proyectId/epic/:epicId/tasks')}>
               <i className="bx bx-grid-alt">
                 <FaTasks />
               </i>

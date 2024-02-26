@@ -9,7 +9,7 @@ const TareasController = {
         (pd) =>
           new Sprint(pd.id, pd.title, pd.description,pd.state, pd.dateStart, pd.dateEnd)
       );
-      res.json(tareas);
+      res.json(tareasData);
     } catch (error) {
       next(error);
     }

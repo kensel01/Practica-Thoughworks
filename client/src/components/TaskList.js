@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {Card} from '@material-ui/core/Card';
+import {CardContent} from '@material-ui/core/CardContent';
+import {Typography} from '@material-ui/core/Typography';
 
 export default function TaskList({ isAuthenticated }) {
     const [tasks, setTasks] = useState([]);
     const navigate = useHistory();
+    const {proyectId}= useParams();
+    const {epicId}= useParams();
 
     const loadTasks = async () => {
         try {
@@ -11,7 +16,7 @@ export default function TaskList({ isAuthenticated }) {
             if (!token) {
                 return;
             }
-            const response = await fetch(`http://localhost:5000/tasks`, {
+            const response = await fetch(`http://localhost:5000/proyect/${proyectId}/epics/${epicId}/task"`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -40,6 +45,25 @@ export default function TaskList({ isAuthenticated }) {
     }, [isAuthenticated]);
 
     return (
-        <h1>Lista de tareas</h1>
+        <div>
+            {tasks.map((task) => (
+                <Card key={task.id} variant="outlined">
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>
+                            Task ID: {task.id}
+                        </Typography>
+                        <Typography variant="h5" component="h2">
+                            {task.title}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            Epic ID: {task.epicId}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                            {task.description}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            ))}
+        </div>
     );
 }
