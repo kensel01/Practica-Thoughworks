@@ -14,12 +14,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import ProyectForm from "./components/ProyectForm";
-import ProyectList from "./components/proyectList";
 import ProyectDashboard from "./components/ProyectDashboard";
-import EpicForm from "./components/EpicForm";
 import EpicDashboard from "./components/EpicDashboard";
-import TaskList from "./components/TaskList";
-import TaskForm from "./components/TaskForm";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,25 +61,12 @@ function App() {
 
           <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
 
-          <Route exact path="/proyects" render={props => isAuthenticated ? (
-            <ProyectList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
           <Route path="/proyects/:id" render={props => isAuthenticated ? (
             <ProyectDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
 
-          <Route path="/proyect/:id_proyect/epic/new" render={props => isAuthenticated ? (
-            <EpicForm {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
           <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
             <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-          <Route path="/proyect/:id_proyect/epic/:id_epic/task" render={props => isAuthenticated ? (
-            <TaskList {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-          <Route path="/proyect/:id_proyect/epic/:id_epic/task/new" render={props => isAuthenticated ? (
-            <TaskForm {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-
+            
         </Container>
       </Switch>
     </Router>

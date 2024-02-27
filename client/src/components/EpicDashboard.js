@@ -33,7 +33,10 @@ const EpicDashboard = ({ isAuthenticated }) => {
     }
 
     const handleOpenModal = () => setOpenModal(true);
-    const handleCloseModal = () => setOpenModal(false);
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        navigate.push(`/proyect/${id_proyect}/epic/${id_epic}`); 
+    };
 
     const modalStyle = {
         position: 'absolute',

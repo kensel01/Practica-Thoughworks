@@ -1,11 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography, Modal, Box } from "@mui/material";
 import { useParams, useHistory } from "react-router-dom";
 import EpicList from "./EpicList";
+import EpicForm from "./EpicForm";
 
 const ProyectDashboard= ({ isAuthenticated })=> { 
     const { id } = useParams();
     const [proyect, setProyect] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
       if (isAuthenticated) {
@@ -31,6 +33,28 @@ const loadproyect= async()=>{
 
 }
 const navigate = useHistory();
+
+const handleOpenModal = () => setOpenModal(true);
+const handleCloseModal = () => {
+    setOpenModal(false);
+    if (id) {
+        navigate.push(`/proyects/${id}`); 
+    } else {
+        console.error("Project ID is undefined");
+    }
+};
+
+const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
     return (
       <Fragment>
@@ -60,17 +84,19 @@ const navigate = useHistory();
                   <Typography style={{ color: 'white' }}>{proyect.name_proyect}</Typography>
                   <Typography style={{ color: 'white' }}>{proyect.proyect_description}</Typography>
                 </div>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{
-                  alignSelf: 'flex-end',
-                  marginTop: 'auto'
-                }}
-                onClick={() => navigate.push(`/proyect/${id}/epic/new`)}
-              >
-                Crear Epica
-              </Button>
+                <Button variant="contained" color="primary" onClick={handleOpenModal}>
+                        Create Epic
+                    </Button>
+              <Modal
+                        open={openModal}
+                        onClose={handleCloseModal}
+                        aria-labelledby="create-task-modal"
+                        aria-describedby="create-task-form"
+                    >
+                        <Box sx={modalStyle}>
+                            <EpicForm /> 
+                        </Box>
+                    </Modal>
               </CardContent>
             </Card>
           )}

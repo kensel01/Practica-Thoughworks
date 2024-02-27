@@ -12,7 +12,7 @@ const EpicForm = () => {
   
   const [loading, setLoading] = useState(false);
   const navigate = useHistory();
-  const {id_proyect} = useParams();
+  const {id} = useParams();
 
 
   
@@ -29,20 +29,20 @@ const EpicForm = () => {
         'Authorization': token ? `Bearer ${token}`: '',
       },
       body: JSON.stringify({
-       proyect_id: id_proyect,
+       proyect_id: id,
         title: epics.title,
         description: epics.description
 
       }),
     };
 
-     const url = `http://localhost:5000/proyect/${id_proyect}/epics`;
+     const url = `http://localhost:5000/proyect/${id}/epics`;
      try{
       const response = await fetch(url, requestOptions);
       if (!response.ok){
         throw new Error('Error al crear el epica');
       }
-      navigate.push(`/proyects/${id_proyect}`);
+      navigate.push(`/proyects/${id}`);
       ;
       }
        catch (error) {
@@ -75,7 +75,7 @@ const EpicForm = () => {
                 }}>
                     <IconButton
                         aria-label="close"
-                        onClick={() => navigate.push(`/proyects/${id_proyect}`)}
+                        onClick={() => navigate.push(`/proyects/${id}`)}
                         style={{
                             position: 'absolute',
                             right: 8,
