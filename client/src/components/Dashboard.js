@@ -91,7 +91,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
           </li>
 
           <li className="list-item">
-            <a onClick={()=> history.push('/proyect/:proyectId/epic/:epicId/tasks')}>
+            <a onClick={()=> history.push(`/user/${userInfo.user_id}/tasks`)}>
               <i className="bx bx-grid-alt">
                 <FaTasks />
               </i>
@@ -147,4 +147,4 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
   );
 }
 
-export default Dashboard;
+export default Dashboard

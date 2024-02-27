@@ -37,13 +37,15 @@ const TareasController = {
   createTask: async (req, res, next) => {
     try {
       const { title, description, state, dateStart, dateEnd, epica_id } = req.body;
+      const userId = req.user.user_id; 
       const taskData = await TareaService.createTask(
         title,
         description,
         state,
         dateStart,
         dateEnd,
-        epica_id
+        epica_id,
+        userId 
       );
       const newTask = new Tareas(
         taskData.title,
@@ -107,6 +109,16 @@ const TareasController = {
       next(error);
     }
   },
+  getTasksByUserId: async (req, res, next) => {
+    try {
+      const userId = req.params.userId;
+      const tasks = await TareaService.getTasksByUserId(userId);
+      res.json(tasks);
+    } catch (error) {
+      next(error);
+    }
+  },
+  
 };
 
 module.exports = TareasController;

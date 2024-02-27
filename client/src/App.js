@@ -16,7 +16,7 @@ import Dashboard from "./components/Dashboard";
 import ProyectForm from "./components/ProyectForm";
 import ProyectDashboard from "./components/ProyectDashboard";
 import EpicDashboard from "./components/EpicDashboard";
-
+import UserTasks from "./components/UserTasks"; 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -66,6 +66,9 @@ function App() {
 
           <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
             <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+            
+          <Route path="/user/:userId/tasks" render={(props) => isAuthenticated ? 
+            (<UserTasks {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} /> 
             
         </Container>
       </Switch>

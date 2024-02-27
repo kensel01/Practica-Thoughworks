@@ -50,7 +50,7 @@ export default function ProyectList({ isAuthenticated }) {
     <>
       <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Proyect List </h1>
 
-      {proyects.map((proyect) => (  // Cambia proyects a proyect en el bucle de mapeo
+      {proyects.map((proyect) => ( 
         <Card
           style={{
             marginBottom: ".3rem",
