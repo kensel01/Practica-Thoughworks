@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 export default function TaskList({ isAuthenticated }) {
     const [tasks, setTasks] = useState([]);
     const navigate = useHistory();
-    const {proyectId}= useParams();
-    const {epicId}= useParams();
+    const {id_proyect}= useParams();
+    const {id_epic}= useParams();
 
     const loadTasks = async () => {
         try {
@@ -16,7 +16,7 @@ export default function TaskList({ isAuthenticated }) {
             if (!token) {
                 return;
             }
-            const response = await fetch(`http://localhost:5000/proyect/${proyectId}/epics/${epicId}/task"`, {
+            const response = await fetch(`http://localhost:5000/proyect/${id_proyect}/epics/${id_epic}/task`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function TaskList({ isAuthenticated }) {
               }}
             >
               <div>
-                <Typography style={{ color: 'white' }}>{task.name_task}</Typography>
+                <Typography style={{ color: 'white' }}>{task.title}</Typography>
                 <Typography style={{ color: 'white' }}>{task.task_description}</Typography>
               </div>
   
