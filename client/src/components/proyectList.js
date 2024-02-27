@@ -47,34 +47,36 @@ export default function ProyectList({ isAuthenticated }) {
   }, [isAuthenticated]);
 
   return (
-    <>
-      <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Proyect List </h1>
-
-      {proyects.map((proyect) => ( 
-        <Card
-          style={{
-            marginBottom: ".3rem",
-            backgroundColor: '#9DB0CE',
-            cursor: 'pointer'
-          }}
-          key={proyect.proyect_id}
-          onClick ={() => navigate.push(`/proyects/${proyect.proyect_id}`)}
-        >
-          <CardContent
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div className="container-item">
-              <div className="item-proyects" key={proyect.proyect_id} onClick={() => navigate.push(`/proyects/${proyect.proyect_id}`)}>
-                <Typography sx={{ color: 'white' }} variant="subtitle1">{proyect.name_proyect}</Typography>
-                <Typography sx={{ color: 'white' }} variant="body2">{proyect.proyect_description}</Typography>
-              </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    {proyects.map((proyect) => (
+      <Card
+        key={proyect.proyect_id}
+        style={{
+          width: "170px",
+          backgroundColor: "#9DB0CE",
+          cursor: "pointer",
+        }}
+        onClick={() => navigate.push(`/proyects/${proyect.proyect_id}`)}
+      >
+        <CardContent>
+          <div className="container-item">
+            <div
+              className="item-proyects"
+              onClick={() =>
+                navigate.push(`/proyects/${proyect.proyect_id}`)
+              }
+            >
+              <Typography sx={{ color: "white" }} variant="subtitle1">
+                {proyect.name_proyect}
+              </Typography>
+              <Typography sx={{ color: "white" }} variant="body2">
+                {proyect.proyect_description}
+              </Typography>
             </div>
-          </CardContent>
-        </Card>
-      ))}
-    </>
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
   );
 }
