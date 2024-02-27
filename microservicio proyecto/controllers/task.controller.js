@@ -112,7 +112,18 @@ const TareasController = {
   getTasksByUserId: async (req, res, next) => {
     try {
       const userId = req.params.userId;
-      const tasks = await TareaService.getTasksByUserId(userId);
+      const taskData = await TareaService.getTasksByUserId(userId);
+      if (taskData.length === 0) {
+        return res.status(404).json({ message: "No se encontraron tareas para el usuario especificado" });
+      }
+      const tasks = taskData.map(task => new Tareas(
+        task.id,
+        task.title,
+        task.description,
+        task.state,
+        task.dateStart,
+        task.dateEnd
+      ));
       res.json(tasks);
     } catch (error) {
       next(error);
