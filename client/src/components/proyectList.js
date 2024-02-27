@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import './styles/Dashboard.css'
 
 export default function ProyectList({ isAuthenticated }) {
   const [proyects, setProyects] = useState([]);
@@ -49,28 +50,28 @@ export default function ProyectList({ isAuthenticated }) {
     <>
       <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Proyect List </h1>
 
-      {proyects.map((proyects) => (
+      {proyects.map((proyect) => (  // Cambia proyects a proyect en el bucle de mapeo
         <Card
           style={{
             marginBottom: ".3rem",
             backgroundColor: '#9DB0CE',
             cursor: 'pointer'
           }}
-          key={proyects.proyect_id}
-          onClick ={() => navigate.push(`/proyects/${proyects.proyect_id}`)}
+          key={proyect.proyect_id}
+          onClick ={() => navigate.push(`/proyects/${proyect.proyect_id}`)}
         >
-
           <CardContent
             style={{
               display: "flex",
               justifyContent: "space-between",
             }}
           >
-            <div>
-              <Typography style={{ color: 'white' }}>{proyects.name_proyect}</Typography>
-              <Typography style={{ color: 'white' }}>{proyects.proyect_description}</Typography>
+            <div className="container-item">
+              <div className="item-proyects" key={proyect.proyect_id} onClick={() => navigate.push(`/proyects/${proyect.proyect_id}`)}>
+                <Typography sx={{ color: 'white' }} variant="subtitle1">{proyect.name_proyect}</Typography>
+                <Typography sx={{ color: 'white' }} variant="body2">{proyect.proyect_description}</Typography>
+              </div>
             </div>
-
           </CardContent>
         </Card>
       ))}
