@@ -28,9 +28,5 @@ const TareaService = {
     );
     return result.rows[0];
   },
-  getTasksByEpicId: async (epicId) => {
-    const result = await pool.query("SELECT * FROM tareas WHERE epica_id = $1", [epicId]);
-    return result.rows;
-  },
 };
 module.exports = TareaService;

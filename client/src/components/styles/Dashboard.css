@@ -125,3 +125,7 @@ body {
     vertical-align: middle;
 }
 
+.item-proyects {
+    flex-grow: 1;
+    flex-basis: 200;
+}

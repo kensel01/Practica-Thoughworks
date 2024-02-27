@@ -7,7 +7,7 @@ const TareasController = {
       const taskData = await TareaService.getAll();
       const tareas = taskData.map(
         (pd) =>
-          new Sprint(pd.id, pd.title, pd.description, pd.state, pd.dateStart, pd.dateEnd)
+          new Sprint(pd.id, pd.title, pd.description,pd.state, pd.dateStart, pd.dateEnd)
       );
       res.json(tareasData);
     } catch (error) {
@@ -22,12 +22,12 @@ const TareasController = {
         return res.status(404).json({ message: "Tarea  no encontrada" });
       }
       const tarea = new Tareas(
-        taskData.id,
-        taskData.title,
-        taskData.description,
-        taskData.state,
-        taskData.dateStart,
-        taskData.dateEnd
+       taskData.id,
+       taskData.title,
+       taskData.description,
+       taskData.state,
+       taskData.dateStart,
+       taskData.dateEnd
       );
       res.json(tarea);
     } catch (error) {
@@ -83,26 +83,6 @@ const TareasController = {
         taskData.dateEnd
       );
       res.json(updatetask);
-    } catch (error) {
-      next(error);
-    }
-  },
-  getTasksByEpicId: async (req, res, next) => {
-    try {
-      const epicId = req.params.epicId;
-      const taskData = await TareaService.getTasksByEpicId(epicId);
-      if (taskData.length === 0) {
-        return res.status(404).json({ message: "No se encontraron tareas para la épica especificada" });
-      }
-      const tasks = taskData.map(task => new Tareas(
-        task.id,
-        task.title,
-        task.description,
-        task.state,
-        task.dateStart,
-        task.dateEnd
-      ));
-      res.json(taskData);
     } catch (error) {
       next(error);
     }
