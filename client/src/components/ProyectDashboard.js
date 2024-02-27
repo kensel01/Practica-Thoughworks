@@ -37,11 +37,6 @@ const navigate = useHistory();
 const handleOpenModal = () => setOpenModal(true);
 const handleCloseModal = () => {
     setOpenModal(false);
-    if (id) {
-        navigate.push(`/proyects/${id}`); 
-    } else {
-        console.error("Project ID is undefined");
-    }
 };
 
 const modalStyle = {
@@ -94,13 +89,13 @@ const modalStyle = {
                         aria-describedby="create-task-form"
                     >
                         <Box sx={modalStyle}>
-                            <EpicForm /> 
+                            <EpicForm onClose={handleCloseModal} /> 
                         </Box>
                     </Modal>
               </CardContent>
             </Card>
           )}
-          <div style={{ width: '75%', overflowY: 'auto' }}>
+          <div style={{ width: '75%', overflowY: 'auto', maxHeight: 'calc(100vh - 64px)', boxSizing: 'border-box' }}>
             <EpicList proyectId={id} isAuthenticated={isAuthenticated} /> 
           </div>
         </div>

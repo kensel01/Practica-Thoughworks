@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typograph
 import CloseIcon from '@mui/icons-material/Close';
 
 
-const EpicForm = () => {
+const EpicForm = ({ onClose }) => { // Added onClose prop
   const [epics, setEpics] = useState({
     title: '',
     description: '',
@@ -42,7 +42,7 @@ const EpicForm = () => {
       if (!response.ok){
         throw new Error('Error al crear el epica');
       }
-      navigate.push(`/proyects/${id}`);
+      onClose(); 
       ;
       }
        catch (error) {
@@ -75,7 +75,7 @@ const EpicForm = () => {
                 }}>
                     <IconButton
                         aria-label="close"
-                        onClick={() => navigate.push(`/proyects/${id}`)}
+                        onClick={onClose} 
                         style={{
                             position: 'absolute',
                             right: 8,

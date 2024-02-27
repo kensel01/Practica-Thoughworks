@@ -66,7 +66,7 @@ const EpicController = {
       const epicas = epicData.map(
         (pd) => new Epica(pd.id, pd.title, pd.description)
       );
-      res.json(epicData);
+      res.json(epicas);
     } catch (error) {
       next(error);
     }
