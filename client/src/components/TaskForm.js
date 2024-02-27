@@ -36,11 +36,12 @@ const TaskForm = () => {
         'Authorization': token ? `Bearer ${token}`: '',
       },
       body: JSON.stringify({
-        task_title: task.title,
-        task_description: task.description,
-        task_state: task.state,
-        date_start: task.date_start,
-        date_end: task.date_end
+        title: task.title,
+        description: task.description,
+        state: task.state,
+        dateStart: task.date_start,
+        dateEnd: task.date_end,
+        epica_id: id_epic
 
       }),
     };

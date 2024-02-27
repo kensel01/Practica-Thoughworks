@@ -36,20 +36,22 @@ const TareasController = {
   },
   createTask: async (req, res, next) => {
     try {
-      const { title, description, state, dateStart, dateEnd } = req.body;
+      const { title, description, state, dateStart, dateEnd, epica_id } = req.body;
       const taskData = await TareaService.createTask(
         title,
         description,
         state,
         dateStart,
-        dateEnd
+        dateEnd,
+        epica_id
       );
       const newTask = new Tareas(
         taskData.title,
         taskData.description,
         taskData.state,
         taskData.dateStart,
-        taskData.dateEnd
+        taskData.dateEnd,
+        taskData.epica_id
       );
 
       res.status(201).json(newTask);

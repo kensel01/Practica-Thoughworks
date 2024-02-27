@@ -13,10 +13,10 @@ const TareaService = {
     return result.rows[0];
   },
 
-  createTask: async (title, description, state, dateStart, dateEnd) => {
+  createTask: async (title, description, state, dateStart, dateEnd, epica_id) => {
     const resutl = await pool.query(
-      "INSERT INTO tareas (task_title,task_description,task_state,date_start,date_end) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-      [title, description, state, dateStart, dateEnd]
+      "INSERT INTO tareas (task_title,task_description,task_state,date_start,date_end,epica_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *",
+      [title, description, state, dateStart, dateEnd, epica_id]
     );
     return resutl.rows[0];
   },

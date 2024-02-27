@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography, Modal, Box } from "@mui/material";
 import TaskList from './TaskList';
+import TaskForm from './TaskForm'; // Import TaskForm component
 
 const EpicDashboard = ({ isAuthenticated }) => {
     const [epic, setEpic] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     const navigate = useHistory();
     const {id_epic} = useParams();
     const {id_proyect} = useParams();
@@ -30,9 +32,23 @@ const EpicDashboard = ({ isAuthenticated }) => {
         setEpic(data);
     }
 
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
+
+    const modalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <h1 style={{ color: '#535878' }}>Epic Details</h1>
             <Card style={{
                 width: '25%',
@@ -57,12 +73,25 @@ const EpicDashboard = ({ isAuthenticated }) => {
                         </>
                     )}
                     
-                    <Button variant="contained" color="primary" onClick={() => navigate.push(`/proyect/${id_proyect}/epic/${id_epic}/task/new`)}>
+                    <Button variant="contained" color="primary" onClick={handleOpenModal}>
                         Create Task
                     </Button>
-                    <TaskList isAuthenticated={isAuthenticated} proyectId={id_proyect} epicId={id_epic} />
+                    <Modal
+                        open={openModal}
+                        onClose={handleCloseModal}
+                        aria-labelledby="create-task-modal"
+                        aria-describedby="create-task-form"
+                    >
+                        <Box sx={modalStyle}>
+                            <TaskForm /> 
+                        </Box>
+                    </Modal>
+                    
                 </CardContent>
             </Card>
+            <div style={{ width: '70%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', overflowY: 'auto' }}>
+                <TaskList isAuthenticated={isAuthenticated} proyectId={id_proyect} epicId={id_epic} />
+            </div>
         </div>
     )
 }
