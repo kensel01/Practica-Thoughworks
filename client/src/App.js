@@ -16,7 +16,7 @@ import ProyectForm from "./components/ProyectForm";
 import ProyectDashboard from "./components/ProyectDashboard";
 import EpicDashboard from "./components/EpicDashboard";
 import Sidebar from "./components/Sidebar";
-import { SidebarProvider } from "./contexts/SidebarContext"; // Import SidebarProvider
+import { SidebarProvider } from "./contexts/SidebarContext"; 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,8 +46,7 @@ function App() {
   return <Fragment>
     <Router>
       <SidebarProvider> 
-        {isAuthenticated }
-        <Sidebar />
+        {isAuthenticated && <Sidebar />}
         <Switch>
           <Container>
             <Route exact path="/" render={() => !isAuthenticated ? (<Redirect to="/login" />) : (<Redirect to="/dashboard" />)} />

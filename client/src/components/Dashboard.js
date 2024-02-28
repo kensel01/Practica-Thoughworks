@@ -30,7 +30,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
         const userData = await response.json();
         if (response.ok) {
           setUserInfo(userData);
-          console.log(userData); // Added console.log to check user data
+        
         } else {
           console.error('Error fetching user info');
         }
@@ -48,7 +48,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
 
   return (
     <Fragment>
-    <h1 style={{ color: 'white', zIndex: 1000, position: 'absolute', top: 0, left: isSidebarOpen ? '23%' : '10%',transition:'left 0.5s ease' }}> Bienvenido {userInfo.name ? userInfo.name : ''} </h1>
+    <h1 style={{ color: 'white', zIndex: 1000, position: 'absolute', top: 0, left: isSidebarOpen ? '23%' : '10%',transition:'left 0.5s ease' }}> Bienvenido {userInfo.user_name} </h1>
     <Box className={`content ${isSidebarOpen ? 'shifted' : ''}`}
       sx={{
         position: 'fixed',
