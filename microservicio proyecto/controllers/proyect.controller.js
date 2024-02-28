@@ -34,11 +34,6 @@ const ProyectosController = {
       const proyectData = await ProyectoService.create(name, description, createby);
       console.log(proyectData)
       const newProyect = new Proyecto(proyectData.proyect_id, proyectData.name_proyect, proyectData.proyect_description, proyectData.create_by);
-      const colaboradores = req.body.colaboradores; 
-      console.log(colaboradores)
-      for (const col of colaboradores) {
-        await ColaboradoresService.create(newProyect.id, col, "Invitado", 2);
-      }
 
       await ColaboradoresService.create(newProyect.id, newProyect.createby, "Admin", 1);
       

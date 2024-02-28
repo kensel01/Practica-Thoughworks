@@ -7,8 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function ProyectForm() {
     const [proyects, setProyects] = useState({
         name: '',
-        description: '',
-        colaboradores: '',
+        description: ''
     });
 
     const [loading, setLoading] = useState(false);
@@ -34,8 +33,6 @@ export default function ProyectForm() {
                 name: proyects.name,
                 description: proyects.description,
                 createby: userId, 
-                colaboradores: proyects.colaboradores.split(',').map(id => id.trim()), 
-                
             }),
             
         };
@@ -64,88 +61,65 @@ export default function ProyectForm() {
     }, []);
 
     return (
-        <Grid container direction="colum" alignItems="center" justifyContent="center">
-            <Grid item xs={3}>
-                <Card sx={{ mt: 5, position: 'relative' }} style={{
-                    backgroundColor: '#9DB0CE',
-                    padding: '1rem',
-                    borderRadius: '10px'
-                }}>
-                    <IconButton
-                        aria-label="close"
-                        onClick={() => navigate.push('/dashboard')}
-                        style={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: 'white',
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                    <Typography variant='5' textAlign='center' color='white'>
-                        {"Create Proyects"}
-                    </Typography>
-                    <CardContent>
-                        <form onSubmit={handleSubmit}>
-                            <TextField
-                                variant='filled'
-                                label='Write your title'
-                                sx={{
-                                    display: 'block',
-                                    margin: '.5rem 0'
-                                }}
-
-                                name="name"
-                                value={proyects.name}
-                                onChange={handleChange}
-                                inputProps={{ style: { color: 'white' } }}
-                                InputLabelProps={{ style: { color: 'white' } }}
-                            />
-
-                            <TextField
-                                variant='filled'
-                                label='Write your description'
-                                multiline
-                                rows={4}
-                                sx={{
-                                    display: 'block',
-                                    margin: '.5rem 0'
-                                }}
-                                name="description"
-                                value={proyects.description}
-                                onChange={handleChange}
-                                inputProps={{ style: { color: 'white' } }}
-                                InputLabelProps={{ style: { color: 'white' } }}
-                            />
-                            <TextField
-                                variant='filled'
-                                label='Colaboradores (IDs separados por comas)'
-                                multiline
-                                rows={2}
-                                sx={{
-                                    display: 'block',
-                                    margin: '.5rem 0'
-                                }}
-                                name="colaboradores"
-                                value={proyects.colaboradores}
-                                onChange={handleChange}
-                                inputProps={{ style: { color: 'white' } }}
-                                InputLabelProps={{ style: { color: 'white' } }}
-                            />
-                            <Button variant='contained' color='primary' type='submit' disabled={!proyects.name || !proyects.description}>
-                                {loading ? (
-                                    <CircularProgress
-                                        color="inherit" size={24} />
-                                ) : (
-                                    "Save"
-                                )}
-                            </Button>
-
-                        </form>
-                    </CardContent>
-                </Card>
-            </Grid>
+        <Grid container direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '100vh' }}>
+        <Grid item xs={10} sm={6} md={4}>
+          <Card sx={{ position: 'relative', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px',backdropFilter: 'blur(40px)',
+        borderRight: '2px solid rgba(255, 255, 255, .2)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+        padding: '6px 14px',color: 'white' }}>
+            <IconButton
+              aria-label="close"
+              onClick={() => navigate.push('/dashboard')}
+              style={{ position: 'absolute', right: 8, top: 8, color: 'white' }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography variant='h5' textAlign='center' color='white' gutterBottom>
+              {"Create Proyects"}
+            </Typography>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  variant='filled'
+                  label='Escribe tu título'
+                  fullWidth
+                  margin='normal'
+                  name="name"
+                  value={proyects.name}
+                  onChange={handleChange}
+                  inputProps={{ style: { color: 'white' } }}
+                  InputLabelProps={{ style: { color: 'white' } }}
+                />
+                <TextField
+                  variant='filled'
+                  label='Escribe tu descripción'
+                  multiline
+                  rows={4}
+                  fullWidth
+                  margin='normal'
+                  name="description"
+                  value={proyects.description}
+                  onChange={handleChange}
+                  inputProps={{ style: { color: 'white' } }}
+                  InputLabelProps={{ style: { color: 'white' } }}
+                />
+                <Button
+                  variant='contained'
+                  color='primary'
+                  type='submit'
+                  disabled={!proyects.name || !proyects.description}
+                  sx={{ marginTop: '1rem' }}
+                >
+                  {loading ? (
+                    <CircularProgress color="inherit" size={24} />
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
+      </Grid>
     );
 }

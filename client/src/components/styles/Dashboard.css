@@ -9,7 +9,7 @@
 
 body {
     min-height: 100vh;
-    background: url('./background1.jpg') no repeat;
+    background: url('./fondo1.jpg') no repeat;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -129,3 +129,7 @@ body {
     flex-grow: 1;
     flex-basis: 200;
 }
+
+.shifted {
+    left: 250px;
+  }

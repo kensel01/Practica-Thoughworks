@@ -18,6 +18,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
   const history = useHistory();
 
   const [userInfo, setUserInfo] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
 
     const fetchUserInfo = async () => {
@@ -51,6 +52,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
   const toggleSidebar = () => {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.toggle('active');
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const handleLogout = () => {
@@ -61,7 +63,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-      <nav className="sidebar">
+      <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
       <div className="logo-menu">
         <h2 className="logo">
           <CgProfile style={{ fontSize: '30px', marginRight: '8px', verticalAlign: 'middle' }} /> 
@@ -113,7 +115,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
             <i className="bx bx-grid-alt">
               <FaCalendarAlt />
               </i>
-              <span className="link-name" style={{ '--i': 5 }}> Calendario </span>
+              <span className="link-name" style={{ '--i': 5 }}> Configuracion </span>
             </a>
           </li>
 
@@ -129,15 +131,20 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
         </ul>
       </nav>
 
-      <Box sx={{ position: 'fixed',
-        top: 90,
-        left: 350,
-        height: '100%',
-        backgroundColor: 'transparent',
-        backdropFilter: 'blur(40px)',
-        borderRight: '2px solid rgba(255, 255, 255, .2)',
-        boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-        padding: '6px 14px',color: 'white' }}>
+      <Box className={`content ${isSidebarOpen ? 'shifted' : ''}`}
+        sx={{
+          position: 'fixed',
+          top: 90,
+          left: isSidebarOpen ? 300 : 100,
+          height: 'calc(100% - 90px)', 
+          backgroundColor: 'transparent',
+          backdropFilter: 'blur(40px)',
+          borderRight: '2px solid rgba(255, 255, 255, .2)',
+          boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+          padding: '6px 14px',
+          color: 'white',
+          transition: 'left 0.5s ease' }}>
+            
         <Typography variant="h5">Proyectos</Typography>
         <Fragment>
           <ProyectList isAuthenticated={isAuthenticated} />
