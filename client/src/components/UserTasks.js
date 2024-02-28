@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Asegúrate de tener esta importación si no está ya en el archivo
+import { jwtDecode } from 'jwt-decode'; 
+import { Card, CardContent, Typography } from '@mui/material';
 
 const UserTasks = ({ isAuthenticated }) => {
   const [tasks, setTasks] = useState([]);
@@ -38,8 +39,34 @@ const UserTasks = ({ isAuthenticated }) => {
 
   return (
    <>
+   <h1 style={{color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant:'5', padding:'1rem'}}>My Tasks</h1>
+   {tasks.map((task) => (
+     <Card
+     style={{
+       marginBottom: ".3rem",
+       backgroundColor: '#9DB0CE',
+       cursor: 'pointer'
+     }}
+        key={task.id}
+   >
+     <CardContent
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div className="container-item">
+              <div className="item-proyects" key={task.id}>
+                <Typography sx={{ color: 'white' }} variant="subtitle1">{task.title}</Typography>
+                <Typography sx={{ color: 'white' }} variant="body2">{task.description}</Typography>
+              </div>
+            </div>
+          </CardContent>
    
-   </>
+     
+   </Card>
+   ))}
+  </>
   );
 };
 

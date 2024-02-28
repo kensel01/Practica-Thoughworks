@@ -2,7 +2,6 @@ const pool = require('../db');
 
 const ColaboradoresService = {
   create: async (id_proyecto, id_usuario, cargo, permisos_id) => {
-    console.log("sdfs")
     const result = await pool.query(
       'INSERT INTO colaboradores (id_proyect, id_user, cargo, permisos_id) VALUES ($1, $2, $3, $4) RETURNING *',
       [id_proyecto, id_usuario, cargo, permisos_id]
