@@ -3,22 +3,16 @@ import { Box, Typography } from "@mui/material";
 import ProyectList from "./proyectList";
 import { jwtDecode } from 'jwt-decode'; 
 import { useHistory } from 'react-router-dom';
-import { MdOutlineDashboard } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import { IoMdMenu } from "react-icons/io";
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { FaTasks } from "react-icons/fa";
-import { AiOutlinePicCenter } from "react-icons/ai";
-import { FaCalendarAlt } from "react-icons/fa";
-import { CiLogout } from "react-icons/ci";
+import { useSidebar } from '../contexts/SidebarContext'; // Import useSidebar
+
 import './styles/Dashboard.css'
 
 
 const Dashboard = ({ isAuthenticated, setAuth }) => {
   const history = useHistory();
-
+  const { isSidebarOpen } = useSidebar(); // Use useSidebar to access isSidebarOpen
   const [userInfo, setUserInfo] = useState({});
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
   useEffect(() => {
 
     const fetchUserInfo = async () => {
@@ -36,6 +30,7 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
         const userData = await response.json();
         if (response.ok) {
           setUserInfo(userData);
+          console.log(userData); // Added console.log to check user data
         } else {
           console.error('Error fetching user info');
         }
@@ -49,109 +44,32 @@ const Dashboard = ({ isAuthenticated, setAuth }) => {
     }
   }, [isAuthenticated]);
   
-  const toggleSidebar = () => {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('active');
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setAuth(false);
-    history.push('/login');
-  }
+  
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh' }}>
-      <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
-      <div className="logo-menu">
-        <h2 className="logo">
-          <CgProfile style={{ fontSize: '30px', marginRight: '8px', verticalAlign: 'middle' }} /> 
-          <span className="username">{userInfo.user_name}</span>
-        </h2>
-          <i className="bx bx-menu toggle-btn" onClick={toggleSidebar}>
-            <IoMdMenu />
-          </i>
-      </div>
-        <ul className="list">
-          <li className="list-item active ">
-            <a href="#">
-              <i className='bx bx-grid-alt'>
-                <MdOutlineDashboard/>
-              </i>
-              <span className="link-name" style={{ '--i': 1 }}> Dashboard </span>
-            </a>
-          </li>
-
-          <li className="list-item ">
-            <a href="#">
-              <i className="bx bx-grid-alt">
-                <AiOutlineFundProjectionScreen />
-              </i>
-              <span className="link-name" style={{ '--i': 2 }}> Proyectos </span>
-            </a>
-          </li>
-
-          <li className="list-item">
-            <a onClick={()=> history.push(`/user/${userInfo.user_id}/tasks`)}>
-              <i className="bx bx-grid-alt">
-                <FaTasks />
-              </i>
-              <span className="link-name" style={{ '--i': 3 }}> Tareas </span>
-            </a>
-          </li>
-
-          <li className="list-item">
-            <a href="#" >
-            <i className="bx bx-grid-alt">
-              <AiOutlinePicCenter />
-              </i>
-              <span className="link-name" style={{ '--i': 4 }}> Epicas </span>
-            </a>
-          </li>
-
-          <li className="list-item">
-            <a href="#">
-            <i className="bx bx-grid-alt">
-              <FaCalendarAlt />
-              </i>
-              <span className="link-name" style={{ '--i': 5 }}> Configuracion </span>
-            </a>
-          </li>
-
-          <li className="list-item">
-            <a href="#" onClick={handleLogout}>
-              <i className="bx bx-grid-alt">
-                <CiLogout />
-              </i>
-              <span className="link-name" style={{ '--i': 6 }}> Cerrar Sesión </span>
-            </a>
-          </li>
-
-        </ul>
-      </nav>
-
-      <Box className={`content ${isSidebarOpen ? 'shifted' : ''}`}
-        sx={{
-          position: 'fixed',
-          top: 90,
-          left: isSidebarOpen ? 300 : 100,
-          height: 'calc(100% - 90px)', 
-          backgroundColor: 'transparent',
-          backdropFilter: 'blur(40px)',
-          borderRight: '2px solid rgba(255, 255, 255, .2)',
-          boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-          padding: '6px 14px',
-          color: 'white',
-          transition: 'left 0.5s ease' }}>
-            
-        <Typography variant="h5">Proyectos</Typography>
-        <Fragment>
-          <ProyectList isAuthenticated={isAuthenticated} />
-        </Fragment>
-      </Box>
+    <Fragment>
+    <h1 style={{ color: 'white', zIndex: 1000, position: 'absolute', top: 0, left: isSidebarOpen ? '23%' : '10%',transition:'left 0.5s ease' }}> Bienvenido {userInfo.name ? userInfo.name : ''} </h1>
+    <Box className={`content ${isSidebarOpen ? 'shifted' : ''}`}
+      sx={{
+        position: 'fixed',
+        top: 90,
+        left: isSidebarOpen ? 300 : 100,
+        height: 'calc(100% - 90px)', 
+        backgroundColor: 'transparent',
+        backdropFilter: 'blur(40px)',
+        borderRight: '2px solid rgba(255, 255, 255, .2)',
+        boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+        padding: '6px 14px',
+        color: 'white',
+        transition: 'left 0.5s ease'
+      }}>
+      <Typography variant="h5">Proyectos</Typography>
+      <Fragment>
+        <ProyectList isAuthenticated={isAuthenticated} />
+      </Fragment>
     </Box>
-  );
+  </Fragment>
+);
 }
 
 export default Dashboard
