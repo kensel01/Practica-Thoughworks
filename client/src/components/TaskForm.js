@@ -78,14 +78,10 @@ const TaskForm = ({ onClose }) => {
             <div> </div>
             <Grid item xs={12} md={8}>
                 <Card sx={{
-                    position: 'relative', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px', backdropFilter: 'blur(40px)',
-                    borderRight: '2px solid rgba(255, 255, 255, .2)',
-                    boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-                    boxSizing: 'border-box',
-                    padding: '20px',
-                    color: 'white',
-                    width: '100%',
-                    height: '100%'
+                    position: 'relative',  
+                    backgroundColor: '#A62254', 
+                    padding: '2rem',
+
                 }} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', height: '100%' }} >
                     <IconButton
                         aria-label="close"
@@ -99,8 +95,8 @@ const TaskForm = ({ onClose }) => {
                     >
                         <CloseIcon />
                     </IconButton>
-                    <Typography variant='5' textAlign='center' color='white'>
-                        {"Create Task"}
+                    <Typography variant='h7' align='left' style={{ fontSize: '20px', color: 'white' }}>
+                        Crear Tarea
                     </Typography>
                     <CardContent>
                         <form onSubmit={handleSubmit}>
@@ -157,7 +153,7 @@ const TaskForm = ({ onClose }) => {
 
                                     <TextField
                                         variant='filled'
-                                        label='Write your date start'
+                                        label='Dia iniciado'
                                         type="date"
                                         sx={{
                                             display: 'block',
@@ -168,12 +164,12 @@ const TaskForm = ({ onClose }) => {
                                         value={task.date_start}
                                         onChange={handleChange}
                                         inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' } }}
+                                        InputLabelProps={{ style: { color: 'white' , marginBottom: '0.5rem'} }}
                                     />
 
                                     <TextField
                                         variant='filled'
-                                        label='Write your date end'
+                                        label='Dia finalizado'
                                         type="date"
                                         sx={{
                                             display: 'block',
@@ -184,7 +180,7 @@ const TaskForm = ({ onClose }) => {
                                         value={task.date_end}
                                         onChange={handleChange}
                                         inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' } }}
+                                        InputLabelProps={{ style: { color: 'white', marginBottom: '0.5rem' } }}
                                     />
                                 </Grid>
                             </Grid>

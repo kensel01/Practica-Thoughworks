@@ -59,17 +59,19 @@ const EpicForm = ({ onClose }) => {
 
     }, []);
 
-
-
     return (
-        <Grid container direction="column" alignItems="center" justifyContent="center">
+        <Grid
+            container
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+        >
             <div> </div>
             <Grid item xs={3}>
                 <Card sx={{
-                    position: 'relative', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px', backdropFilter: 'blur(40px)',
-                    borderRight: '2px solid rgba(255, 255, 255, .2)',
-                    boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-                    padding: '6px 14px', color: 'white'
+                    position: 'relative',  
+                    backgroundColor: '#A62254', 
+                    padding: '2rem',
                 }} >
                     <IconButton
                         aria-label="close"
@@ -83,8 +85,8 @@ const EpicForm = ({ onClose }) => {
                     >
                         <CloseIcon />
                     </IconButton>
-                    <Typography variant='5' textAlign='center' color='white'>
-                        {"Create Epic"}
+                    <Typography variant='h5' align='left' style={{ fontSize: '20px', color: 'white' }}>
+                        Crear Epica
                     </Typography>
                     <CardContent>
                         <form onSubmit={handleSubmit}>
@@ -95,14 +97,14 @@ const EpicForm = ({ onClose }) => {
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
-
+    
                                 name="title"
                                 value={epics.title}
                                 onChange={handleChange}
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
                             />
-
+    
                             <TextField
                                 variant='filled'
                                 label='Write your description'
@@ -118,7 +120,7 @@ const EpicForm = ({ onClose }) => {
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
                             />
-
+    
                             <Button variant='contained' color='primary' type='submit' disabled={!epics.title || !epics.description}>
                                 {loading ? (
                                     <CircularProgress
@@ -127,13 +129,13 @@ const EpicForm = ({ onClose }) => {
                                     "Save"
                                 )}
                             </Button>
-
+    
                         </form>
                     </CardContent>
                 </Card>
             </Grid>
         </Grid>
-    );
+    );    
 }
 
 export default EpicForm;
