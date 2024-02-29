@@ -52,7 +52,7 @@ const Sidebar = ({ setAuth }) => {
     };
     const handleLogout = () => {
         localStorage.removeItem("token");
-        setAuth(false);
+        
         history.push('/login');
     };
 
