@@ -48,14 +48,20 @@ export default function EpicList({ isAuthenticated }) {
 
   return (
     <>
-      <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Epics </h1>
+      <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'justify', 
+      borderRadius: '10px', variant: '5', padding: '1rem' }}> Epics </h1>
 
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
       {epics.map((epic) => (
         <Card
           style={{
-            marginBottom: ".3rem",
-            backgroundColor: '#9DB0CE',
-            cursor: 'pointer'
+            width: "200px",
+            backgroundColor: 'rgba(166, 34, 84, 0.7)',
+            cursor: "pointer",
+            border: "2px solid transparent",
+            padding: "10px", 
+            margin: "10px",
+            marginTop: "20px"
           }}
           key={epic.epica_id}
           onClick={() => navigate.push(`/proyect/${id_proyect}/epic/${epic.epica_id}`)}
@@ -64,17 +70,19 @@ export default function EpicList({ isAuthenticated }) {
           <CardContent
             style={{
               display: "flex",
+              flexDirection: "column",
               justifyContent: "space-between",
+              height: "100%",
             }}
           >
             <div>
-              <Typography style={{ color: 'white' }}>{epic.title}</Typography>
-              <Typography style={{ color: 'white' }}>{epic.description}</Typography>
+              <Typography style={{ color: 'white',fontSize: '25px' }}>{epic.title}</Typography>
+              <Typography style={{ color: 'gray' }}>{epic.description}</Typography>
             </div>
-
           </CardContent>
         </Card>
       ))}
+      </div>
     </>
   );
 }

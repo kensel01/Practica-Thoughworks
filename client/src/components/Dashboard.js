@@ -19,7 +19,7 @@ const Dashboard = ({ isAuthenticated }) => {
           left: isSidebarOpen ? 300 : 100,
           height: 'calc(100% - 90px)',
           backgroundColor: 'transparent',
-          backdropFilter: 'blur(40px)',
+          backdropFilter: 'blur(20px)',
           borderRight: '2px solid rgba(255, 255, 255, .2)',
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           padding: '6px 14px',

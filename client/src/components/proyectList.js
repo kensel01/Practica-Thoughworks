@@ -52,9 +52,13 @@ export default function ProyectList({ isAuthenticated }) {
       <Card
         key={proyect.proyect_id}
         style={{
-          width: "170px",
-          backgroundColor: "#9DB0CE",
+          width: "200px",
+          backgroundColor: 'rgba(166, 34, 84, 0.7)',
           cursor: "pointer",
+          border: "2px solid transparent",
+          padding: "10px", 
+          margin: "10px",
+          marginTop: "20px",
         }}
         onClick={() => navigate.push(`/proyects/${proyect.proyect_id}`)}
       >
@@ -66,10 +70,10 @@ export default function ProyectList({ isAuthenticated }) {
                 navigate.push(`/proyects/${proyect.proyect_id}`)
               }
             >
-              <Typography sx={{ color: "white" }} variant="subtitle1">
+              <Typography sx={{ color: "white",fontSize: '25px' }} variant="subtitle1">
                 {proyect.name_proyect}
               </Typography>
-              <Typography sx={{ color: "white" }} variant="body2">
+              <Typography sx={{ color: "gray" ,fontSize: '15px'}} variant="body2">
                 {proyect.proyect_description}
               </Typography>
             </div>

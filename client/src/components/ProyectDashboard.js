@@ -67,25 +67,28 @@ const ProyectDashboard = ({ isAuthenticated }) => {
         minHeight: 'calc(100vh - 90px)',
         padding: '6px 14px',
       }}>
-        <Box sx={{
+        <Box sx={{ 
           width: '30%',
           backgroundColor: 'transparent',
-          backdropFilter: 'blur(40px)',
+          backdropFilter: 'blur(10px)',
           borderRight: '2px solid rgba(255, 255, 255, .2)',
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           color: 'white',
         }}>
-          <h1 style={{ color: '#535878' }}>Proyecto{id}</h1>
+          <h1 style={{ color: 'white', textAlign: 'center' }}> Proyecto {id} </h1>
           <div style={{ display: 'flex', width: '100%' }}>
             {proyect && (
               <Card
-                style={{
-                  width: '60%',
-                  position: 'relative',
-                  minHeight: 'calc(80vh - 64px)',
-                  backgroundColor: '#9DB0CE',
-                  cursor: 'pointer'
-                }}
+                style={{ 
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: '40%',
+                backgroundColor: 'rgba(166, 34, 84, 0.7)',
+                boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+                color: 'white',
+                padding: '6px 14px',}}
                 key={proyect.proyect_id}
               >
 
@@ -98,12 +101,13 @@ const ProyectDashboard = ({ isAuthenticated }) => {
                   }}
                 >
                   <div>
-                    <Typography style={{ color: 'white' }}>{proyect.name_proyect}</Typography>
-                    <Typography style={{ color: 'black' }}>---------------------------</Typography>
-                    <Typography style={{ color: 'white' }}>{proyect.proyect_description}</Typography>
+                    <Typography style={{ color: 'white', fontSize: '30px' }}>{proyect.name_proyect}</Typography>
+                    <Typography style={{ color: 'gray' }}>{proyect.proyect_description}</Typography>
                   </div>
-                  <Button variant="contained" color="primary" onClick={handleOpenModal}>
-                    Create Epic
+                  <Button variant="contained" color="primary" onClick={handleOpenModal}
+                  style={{ backgroundColor: '#A62254', color: 'white' }}
+                  >
+                    Crear Epica
                   </Button>
                   <Modal
                     open={openModal}
@@ -123,7 +127,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
         <Box sx={{
           width: '68%',
           backgroundColor: 'transparent',
-          backdropFilter: 'blur(40px)',
+          backdropFilter: 'blur(10px)',
           borderLeft: '2px solid rgba(255, 255, 255, .2)',
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           color: 'white',
