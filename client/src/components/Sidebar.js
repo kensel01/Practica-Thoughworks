@@ -41,7 +41,7 @@ const Sidebar = ({}) => {
             const userData = await response.json();
             if (response.ok) {
                 setUserInfo(userData);
-                console.log(userData.user_name); // Moved console.log to correct scope where userInfo is defined
+                console.log(userData.user_name);
                 
             } else {
                 console.error('Error fetching user info');

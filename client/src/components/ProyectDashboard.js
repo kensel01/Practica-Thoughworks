@@ -99,7 +99,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
                 >
                   <div>
                     <Typography style={{ color: 'white' }}>{proyect.name_proyect}</Typography>
-                    <Typography style={{ color: 'black' }}>---------------------------</Typography>
+                    <Typography style={{ color: 'black' }}>---------------</Typography>
                     <Typography style={{ color: 'white' }}>{proyect.proyect_description}</Typography>
                   </div>
                   <Button variant="contained" color="primary" onClick={handleOpenModal}>
