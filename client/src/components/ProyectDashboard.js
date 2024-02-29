@@ -107,7 +107,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
                   <Button variant="contained" color="primary" onClick={handleOpenModal}
                   style={{ backgroundColor: '#A62254', color: 'white' }}
                   >
-                    Crear Epica
+                    Crear Epicas
                   </Button>
                   <Modal
                     open={openModal}
