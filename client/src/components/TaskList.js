@@ -46,31 +46,39 @@ export default function TaskList({ isAuthenticated }) {
 
     return (
         <>
-        <h1 style={{ color: '#535878', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Task List </h1>
-  
+        <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'justify', 
+        borderRadius: '10px', variant: '5', padding: '1rem' }}> Tareas </h1>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {tasks.map((task) => (
           <Card
             style={{
-              marginBottom: ".3rem",
-              backgroundColor: '#9DB0CE',
-              cursor: 'pointer'
+              width: "200px",
+              backgroundColor: 'rgba(166, 34, 84, 0.7)',
+              cursor: "pointer",
+              border: "2px solid transparent",
+              padding: "10px", 
+              margin: "10px",
+              marginTop: "20px"
             }}
             key={task.task_id}
           >
             <CardContent
               style={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "space-between",
+                height: "100%",
               }}
             >
               <div>
-                <Typography style={{ color: 'white' }}>{task.title}</Typography>
-                <Typography style={{ color: 'white' }}>{task.task_description}</Typography>
+                <Typography style={{ color: 'white',fontSize: '25px'  }}>{task.task_title}</Typography>
+                <Typography style={{ color: 'gray' }}>{task.task_description}</Typography>
               </div>
-  
             </CardContent>
           </Card>
         ))}
+        </div>
       </>
     );
 }

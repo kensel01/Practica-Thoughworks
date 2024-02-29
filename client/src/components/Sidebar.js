@@ -76,7 +76,7 @@ const Sidebar = ({ setAuth }) => {
                             <i className='bx bx-grid-alt'>
                                 <MdOutlineDashboard />
                             </i>
-                            <span className="link-name" style={{ '--i': 1 }}> Dashboard </span>
+                            <span className="link-name" style={{ '--i': 1 }}> Proyectos </span>
                         </a>
                     </li>
 
@@ -85,7 +85,7 @@ const Sidebar = ({ setAuth }) => {
                             <i className="bx bx-grid-alt">
                                 <AiOutlineFundProjectionScreen />
                             </i>
-                            <span className="link-name" style={{ '--i': 2 }}> Nuevo Proyecto </span>
+                            <span className="link-name" style={{ '--i': 2 }}> Crear Proyecto </span>
                         </a>
                     </li>
 
@@ -94,7 +94,7 @@ const Sidebar = ({ setAuth }) => {
                             <i className="bx bx-grid-alt">
                                 <FaCalendarAlt />
                             </i>
-                            <span className="link-name" style={{ '--i': 5 }}> Configuracion </span>
+                            <span className="link-name" style={{ '--i': 3 }}> Configuracion </span>
                         </a>
                     </li>
 
@@ -103,7 +103,7 @@ const Sidebar = ({ setAuth }) => {
                             <i className="bx bx-grid-alt">
                                 <CiLogout />
                             </i>
-                            <span className="link-name" style={{ '--i': 6 }}> Cerrar Sesión </span>
+                            <span className="link-name" style={{ '--i': 4 }}> Cerrar Sesión </span>
                         </a>
                     </li>
 
