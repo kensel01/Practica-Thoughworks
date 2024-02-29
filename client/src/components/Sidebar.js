@@ -23,7 +23,7 @@ const Sidebar = ({}) => {
     };
     const handleLogout = () => {
         localStorage.removeItem("token");
-        setAuth(false);
+        
         history.push('/login');
     };
     const fetchUserInfo = async () => {
