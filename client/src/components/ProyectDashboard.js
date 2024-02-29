@@ -3,11 +3,14 @@ import { Button, Card, CardContent, Typography, Modal, Box } from "@mui/material
 import { useParams, useHistory } from "react-router-dom";
 import EpicList from "./EpicList";
 import EpicForm from "./EpicForm";
+import { useSidebar } from '../contexts/SidebarContext';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const ProyectDashboard = ({ isAuthenticated }) => {
   const { id } = useParams();
   const [proyect, setProyect] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const { isSidebarOpen } = useSidebar();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -62,10 +65,11 @@ const ProyectDashboard = ({ isAuthenticated }) => {
         justifyContent: 'space-between',
         position: 'fixed',
         top: 20,
-        left: 100,
+        left: isSidebarOpen ? 300 : 100,
         width: 'calc(100% - 100px)',
         minHeight: 'calc(100vh - 90px)',
         padding: '6px 14px',
+        transition: 'left 0.5s ease'
       }}>
         <Box sx={{ 
           width: '30%',
@@ -75,6 +79,19 @@ const ProyectDashboard = ({ isAuthenticated }) => {
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           color: 'white',
         }}>
+          <Button
+                    onClick={() => navigate.push(`/dashboard`)}
+                    sx={{
+                      minWidth: '40px',
+                      height: '40px',
+                      position: 'absolute',
+                      left: 10,
+                      top: '5%',
+                      transform: 'translateY(-50%)',
+                    }}
+                  >
+                    <ArrowBackIcon sx={{ color: 'white' }}/>
+                  </Button>
           <h1 style={{ color: 'white', textAlign: 'center' }}> Proyecto {id} </h1>
           <div style={{ display: 'flex', width: '100%' }}>
             {proyect && (
@@ -132,6 +149,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           color: 'white',
           overflowY: 'auto',
+          right: 5,
         }}>
           <div style={{ width: '75%', overflowY: 'auto', maxHeight: 'calc(100vh - 64px)', boxSizing: 'border-box' }}>
             <EpicList proyectId={id} isAuthenticated={isAuthenticated} />

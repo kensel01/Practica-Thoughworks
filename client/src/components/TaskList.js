@@ -62,6 +62,7 @@ export default function TaskList({ isAuthenticated }) {
               marginTop: "20px"
             }}
             key={task.task_id}
+            onClick={() => navigate.push(`/proyect/${id_proyect}/epic/${id_epic}/task/${tasks.task_id}`)}
           >
             <CardContent
               style={{

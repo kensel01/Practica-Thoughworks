@@ -16,7 +16,8 @@ import ProyectForm from "./components/ProyectForm";
 import ProyectDashboard from "./components/ProyectDashboard";
 import EpicDashboard from "./components/EpicDashboard";
 import Sidebar from "./components/Sidebar";
-import { SidebarProvider } from "./contexts/SidebarContext"; 
+import TaskDashboard from "./components/TaskDashboard";
+import { SidebarProvider } from "./contexts/SidebarContext";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,33 +47,39 @@ function App() {
   return (
     <Fragment>
       <Router>
-        <SidebarProvider> 
+        <SidebarProvider>
           {isAuthenticated && <Sidebar setAuth={setAuth} />}
           <Switch>
             <Container>
               <Route exact path="/" render={() => !isAuthenticated ? (<Redirect to="/login" />) : (<Redirect to="/dashboard" />)} />
-  
+
               <Route exact path="/login" render={props => !isAuthenticated ? (
                 <Login {...props} setAuth={setAuth} />) : (<Redirect to="/dashboard" />)} />
-  
+
               <Route exact path="/register" render={props => !isAuthenticated ? (
                 <Register {...props} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
-  
+
               <Route exact path="/dashboard" render={props => isAuthenticated ? (
                 <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
-  
+
               <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
-  
+
               <Route path="/proyects/:id" render={props => isAuthenticated ? (
                 <ProyectDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-  
+
               <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
                 <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+
+              <Route path="/proyect/:id_proyect/epic/:id_epic/task/:id_task" render={props => isAuthenticated ? (
+                <TaskDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+
+              
+
             </Container>
           </Switch>
         </SidebarProvider>
       </Router>
     </Fragment>
-  );  
+  );
 };
 export default App;

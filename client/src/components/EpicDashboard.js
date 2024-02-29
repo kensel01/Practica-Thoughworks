@@ -3,10 +3,13 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import { Button, Card, CardContent, Typography, Modal, Box } from "@mui/material";
 import TaskList from './TaskList';
 import TaskForm from './TaskForm'; 
+import { useSidebar } from '../contexts/SidebarContext';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const EpicDashboard = ({ isAuthenticated }) => {
     const [epic, setEpic] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const { isSidebarOpen } = useSidebar();
     const navigate = useHistory();
     const {id_epic} = useParams();
     const {id_proyect} = useParams();
@@ -44,11 +47,9 @@ const EpicDashboard = ({ isAuthenticated }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: '90%',
+        height: '90%',
         bgcolor: 'transparent',
-        backdropFilter: 'blur(40px)',
-        borderRight: '2px solid rgba(255, 255, 255, .2)',
-        boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
@@ -62,10 +63,11 @@ const EpicDashboard = ({ isAuthenticated }) => {
                 justifyContent: 'space-between',
                 position: 'fixed',
                 top: 20,
-                left: 100,
+                left: isSidebarOpen ? 300 : 100,
                 width: 'calc(100% - 100px)',
                 minHeight: 'calc(100vh - 90px)',
                 padding: '6px 14px',
+                transition: 'left 0.5s ease'
               }}>
                 <Box sx={{ 
                   width: '30%',
@@ -74,7 +76,20 @@ const EpicDashboard = ({ isAuthenticated }) => {
                   borderRight: '2px solid rgba(255, 255, 255, .2)',
                   boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
                   color: 'white',
+                  
                 }}>
+                  <Button
+                    onClick={() => navigate.goBack()}
+                    sx={{
+                      minWidth: '40px',
+                      height: '40px',
+                      position: 'absolute',
+                      left: 16,
+                      top: 16,
+                    }}
+                  >
+                    <ArrowBackIcon sx={{ color: 'white' }}/>
+                  </Button>
                   <h1 style={{ color: 'white', textAlign: 'center' }}> Epica {id_epic} </h1>
                   <div style={{ display: 'flex', width: '100%' }}>
                     {epic && (

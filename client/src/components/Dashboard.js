@@ -11,7 +11,6 @@ const Dashboard = ({ isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 style={{ color: 'white', zIndex: 1000, position: 'absolute', top: 0, left: isSidebarOpen ? '23%' : '10%', transition: 'left 0.5s ease' }}>  </h1>
       <Box className={`content ${isSidebarOpen ? 'shifted' : ''}`}
         sx={{
           position: 'fixed',
@@ -24,7 +23,8 @@ const Dashboard = ({ isAuthenticated }) => {
           boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
           padding: '6px 14px',
           color: 'white',
-          transition: 'left 0.5s ease'
+          transition: 'left 0.5s ease',
+          overflowY: 'auto'
         }}>
         <Typography variant="h5">Proyectos</Typography>
         <Fragment>

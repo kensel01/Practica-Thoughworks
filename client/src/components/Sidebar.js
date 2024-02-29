@@ -99,7 +99,7 @@ const Sidebar = ({ setAuth }) => {
                     </li>
 
                     <li className="list-item">
-                        <a href="#" onClick={handleLogout}>
+                        <a  onClick={handleLogout}>
                             <i className="bx bx-grid-alt">
                                 <CiLogout />
                             </i>

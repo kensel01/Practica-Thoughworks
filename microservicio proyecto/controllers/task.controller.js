@@ -29,7 +29,7 @@ const TareasController = {
         taskData.dateStart,
         taskData.dateEnd
       );
-      res.json(tarea);
+      res.json(taskData);
     } catch (error) {
       next(error);
     }
