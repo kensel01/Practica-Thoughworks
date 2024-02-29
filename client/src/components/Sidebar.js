@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineDashboard } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { IoMdMenu } from "react-icons/io";
@@ -11,10 +11,39 @@ import './styles/Dashboard.css'
 import { useSidebar } from '../contexts/SidebarContext';
 import { jwtDecode } from 'jwt-decode'
 
-const Sidebar = ({}) => {
+const Sidebar = ({ setAuth }) => {
     const [userInfo, setUserInfo] = useState({});
     const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
     const history = useHistory();
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const decoded = jwtDecode(token);
+                const userId = decoded.user_id;
+                const response = await fetch(`http://localhost:5000/user/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                });
+                const userData = await response.json();
+                if (response.ok) {
+                    setUserInfo(userData);
+                    console.log(userData.user_name);
+                } else {
+                    console.error('Error fetching user info');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchUserInfo(); // Llamar a fetchUserInfo cuando el componente se monta
+
+    }, []); // Arreglo de dependencias vacío para que se ejecute una vez
 
     const toggleSidebar = () => {
         const sidebar = document.querySelector('.sidebar');
@@ -26,33 +55,8 @@ const Sidebar = ({}) => {
         
         history.push('/login');
     };
-    const fetchUserInfo = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const decoded = jwtDecode(token);
-            const userId = decoded.user_id;
-            const response = await fetch(`http://localhost:5000/user/${userId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-            });
-            const userData = await response.json();
-            if (response.ok) {
-                setUserInfo(userData);
-                console.log(userData.user_name);
-                
-            } else {
-                console.error('Error fetching user info');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
 
     return (
-
         <Box sx={{ display: 'flex', height: '100vh' }}>
             <nav className={`sidebar ${isSidebarOpen ? 'active' : ''}`}
                 onMouseEnter={() => setIsSidebarOpen(true)}
@@ -60,7 +64,7 @@ const Sidebar = ({}) => {
                 <div className="logo-menu">
                     <h2 className="logo">
                         <CgProfile style={{ fontSize: '30px', marginRight: '8px', verticalAlign: 'middle' }} />
-                        <span className="username">{userInfo.user_name}</span>
+                        <span className="username"> {userInfo.user_name} </span>
                     </h2>
                     <i className="bx bx-menu toggle-btn" onClick={toggleSidebar}>
                         <IoMdMenu />
@@ -110,4 +114,5 @@ const Sidebar = ({}) => {
 }
 
 export default Sidebar;
+
 

@@ -43,36 +43,36 @@ function App() {
     checkAuthenticated();
   }, []);
 
-  return <Fragment>
-    <Router>
-      <SidebarProvider> 
-        {isAuthenticated && <Sidebar />}
-        <Switch>
-          <Container>
-            <Route exact path="/" render={() => !isAuthenticated ? (<Redirect to="/login" />) : (<Redirect to="/dashboard" />)} />
-
-            <Route exact path="/login" render={props => !isAuthenticated ? (
-              <Login {...props} setAuth={setAuth} />) : (<Redirect to="/dashboard" />)} />
-
-            <Route exact path="/register" render={props => !isAuthenticated ? (
-              <Register {...props} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
-
-            <Route exact path="/dashboard" render={props => isAuthenticated ? (
-              <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
-
-            <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
-
-            <Route path="/proyects/:id" render={props => isAuthenticated ? (
-              <ProyectDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-            <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
-              <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-              
-              
-          </Container>
-        </Switch>
-      </SidebarProvider>
-    </Router>
-  </Fragment>
+  return (
+    <Fragment>
+      <Router>
+        <SidebarProvider> 
+          {isAuthenticated && <Sidebar setAuth={setAuth} />}
+          <Switch>
+            <Container>
+              <Route exact path="/" render={() => !isAuthenticated ? (<Redirect to="/login" />) : (<Redirect to="/dashboard" />)} />
+  
+              <Route exact path="/login" render={props => !isAuthenticated ? (
+                <Login {...props} setAuth={setAuth} />) : (<Redirect to="/dashboard" />)} />
+  
+              <Route exact path="/register" render={props => !isAuthenticated ? (
+                <Register {...props} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
+  
+              <Route exact path="/dashboard" render={props => isAuthenticated ? (
+                <Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} />) : (<Redirect to="/login" />)} />
+  
+              <Route path="/proyect/new" render={(props) => <ProyectForm {...props} />} />
+  
+              <Route path="/proyects/:id" render={props => isAuthenticated ? (
+                <ProyectDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+  
+              <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
+                <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
+            </Container>
+          </Switch>
+        </SidebarProvider>
+      </Router>
+    </Fragment>
+  );  
 };
 export default App;
