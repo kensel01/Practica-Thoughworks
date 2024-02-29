@@ -41,9 +41,9 @@ const Sidebar = ({ setAuth }) => {
             }
         };
 
-        fetchUserInfo(); // Llamar a fetchUserInfo cuando el componente se monta
+        fetchUserInfo(); 
 
-    }, []); // Arreglo de dependencias vacío para que se ejecute una vez
+    }, []); 
 
     const toggleSidebar = () => {
         const sidebar = document.querySelector('.sidebar');
