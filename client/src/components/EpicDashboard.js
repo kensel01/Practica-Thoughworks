@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const EpicDashboard = ({ isAuthenticated }) => {
     const [epic, setEpic] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [reloadTasks, setReloadTasks] = useState(false);
     const { isSidebarOpen } = useSidebar();
     const navigate = useHistory();
     const {id_epic} = useParams();
@@ -61,6 +62,7 @@ const EpicDashboard = ({ isAuthenticated }) => {
         } else if (epic) {
             setEpic({ ...epic, tasks: [newTask] });
         }
+        setReloadTasks(prev => !prev);
     };
 
     return (
@@ -152,7 +154,7 @@ const EpicDashboard = ({ isAuthenticated }) => {
                   overflowY: 'auto',
                 }}>
                   <div style={{ width: '75%', overflowY: 'auto', maxHeight: 'calc(100vh - 64px)', boxSizing: 'border-box'}}>
-                    <TaskList isAuthenticated={isAuthenticated} proyectId={id_proyect} epicId={id_epic} />
+                  <TaskList reloadTasks={reloadTasks} setReloadTasks={setReloadTasks} />
                   </div>
                 </Box>
               </Box>

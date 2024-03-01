@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 
 
-const TaskForm = ({ onClose, onTaskCreated }) => {
+const TaskForm = ({ onClose }) => {
     const [task, setTask] = useState({
         title: '',
         description: '',
@@ -47,9 +47,7 @@ const TaskForm = ({ onClose, onTaskCreated }) => {
             if (!response.ok) {
                 throw new Error('Error al crear tarea');
             }
-            const newTask = await response.json();
-            onTaskCreated(newTask);
-            navigate.push(`/proyect/${id_proyect}/epic/${id_epic}`);
+            navigate.push(`/proyects/${id_proyect}`);
         }
         catch (error) {
             console.error('Error al crear tarea', error);

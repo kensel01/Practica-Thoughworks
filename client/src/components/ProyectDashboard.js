@@ -10,6 +10,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
   const { id } = useParams();
   const [proyect, setProyect] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [reloadEpics, setReloadEpics] = useState(false);
   const { isSidebarOpen } = useSidebar();
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
     } else if (proyect) {
       setProyect({ ...proyect, epics: [newEpic] });
     }
+    setReloadEpics(prev => !prev);
   };
 
   const modalStyle = {
@@ -160,7 +162,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
           right: 5,
         }}>
           <div style={{ width: '75%', overflowY: 'auto', maxHeight: 'calc(100vh - 64px)', boxSizing: 'border-box' }}>
-            <EpicList proyectId={id} isAuthenticated={isAuthenticated} />
+          <EpicList proyectId={id} isAuthenticated={isAuthenticated} reloadEpics={reloadEpics} setReloadEpics={setReloadEpics} />
           </div>
         </Box>
       </Box>

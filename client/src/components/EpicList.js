@@ -3,7 +3,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 
-export default function EpicList({ isAuthenticated }) {
+export default function EpicList({ isAuthenticated, reloadEpics }) {
   const [epics, setEpics] = useState([]);
   const navigate = useHistory();
 
@@ -44,7 +44,7 @@ export default function EpicList({ isAuthenticated }) {
     if (isAuthenticated) {
       loadEpics();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated,reloadEpics]);
 
   return (
     <>
