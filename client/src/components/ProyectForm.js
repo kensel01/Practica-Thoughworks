@@ -66,6 +66,7 @@ export default function ProyectForm() {
           <Card sx={{ position: 'relative', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px',backdropFilter: 'blur(40px)',
         borderRight: '2px solid rgba(255, 255, 255, .2)',
         boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+        
         padding: '6px 14px',color: 'white' }}>
             <IconButton
               aria-label="close"

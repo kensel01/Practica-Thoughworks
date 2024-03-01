@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typograph
 import CloseIcon from '@mui/icons-material/Close';
 
 
-const EpicForm = ({ onClose }) => { 
+const EpicForm = ({ onClose, onEpicCreated }) => { 
     const [epics, setEpics] = useState({
         title: '',
         description: '',
@@ -39,6 +39,8 @@ const EpicForm = ({ onClose }) => {
             if (!response.ok) {
                 throw new Error('Error al crear el epica');
             }
+            const newEpic = await response.json();
+            onEpicCreated(newEpic);
             onClose();
             ;
         }

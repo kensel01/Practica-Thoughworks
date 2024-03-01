@@ -55,6 +55,14 @@ const EpicDashboard = ({ isAuthenticated }) => {
         p: 4,
     };
 
+    const handleTaskCreated = (newTask) => {
+        if (epic && epic.tasks) {
+            setEpic({ ...epic, tasks: [...epic.tasks, newTask] });
+        } else if (epic) {
+            setEpic({ ...epic, tasks: [newTask] });
+        }
+    };
+
     return (
             <Fragment>
               <Box sx={{
@@ -126,7 +134,7 @@ const EpicDashboard = ({ isAuthenticated }) => {
                             aria-describedby="create-task-form"
                           >
                             <Box sx={modalStyle}>
-                              <TaskForm onClose={handleCloseModal}/> 
+                              <TaskForm onClose={handleCloseModal} onTaskCreated={handleTaskCreated}/> 
                             </Box>
                           </Modal>    
                         </CardContent>

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 
 
-const TaskForm = ({ onClose }) => {
+const TaskForm = ({ onClose, onTaskCreated }) => {
     const [task, setTask] = useState({
         title: '',
         description: '',
@@ -47,7 +47,9 @@ const TaskForm = ({ onClose }) => {
             if (!response.ok) {
                 throw new Error('Error al crear tarea');
             }
-            navigate.push(`/proyects/${id_proyect}`);
+            const newTask = await response.json();
+            onTaskCreated(newTask);
+            navigate.push(`/proyect/${id_proyect}/epic/${id_epic}`);
         }
         catch (error) {
             console.error('Error al crear tarea', error);
@@ -98,14 +100,7 @@ const TaskForm = ({ onClose }) => {
                                     inputProps={{ style: { color: 'white' } }}
                                     InputLabelProps={{ style: { color: 'white' } }}
                             />
-                            <TextField variant='filled' label='Write your state'
-                                sx={{ display: 'block', margin: '.5rem 0', width: '100%' }}
-                                    name="state"
-                                    value={task.state}
-                                    onChange={handleChange}
-                                    inputProps={{ style: { color: 'white' } }}
-                                    InputLabelProps={{ style: { color: 'white' } }}
-                            />
+                            
                             <TextField variant='filled' label='Dia iniciado' type="date" 
                                 sx={{ display: 'block', margin: '.5rem 0', width: '100%'}}
                                     name="date_start"

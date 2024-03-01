@@ -42,6 +42,14 @@ const ProyectDashboard = ({ isAuthenticated }) => {
     setOpenModal(false);
   };
 
+  const handleEpicCreated = (newEpic) => {
+    if (proyect && proyect.epics) {
+      setProyect({ ...proyect, epics: [...proyect.epics, newEpic] });
+    } else if (proyect) {
+      setProyect({ ...proyect, epics: [newEpic] });
+    }
+  };
+
   const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -133,7 +141,7 @@ const ProyectDashboard = ({ isAuthenticated }) => {
                     aria-describedby="create-task-form"
                   >
                     <Box sx={modalStyle}>
-                      <EpicForm onClose={handleCloseModal} />
+                      <EpicForm onClose={handleCloseModal} onEpicCreated={handleEpicCreated} />
                     </Box>
                   </Modal>
                 </CardContent>
@@ -160,4 +168,4 @@ const ProyectDashboard = ({ isAuthenticated }) => {
   )
 }
 
-export default ProyectDashboard;
+export default ProyectDashboard
