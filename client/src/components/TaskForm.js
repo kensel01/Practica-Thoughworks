@@ -47,7 +47,7 @@ const TaskForm = ({ onClose }) => {
             if (!response.ok) {
                 throw new Error('Error al crear tarea');
             }
-            navigate.push(`/proyects/${id_proyect}`);
+            onClose();
         }
         catch (error) {
             console.error('Error al crear tarea', error);

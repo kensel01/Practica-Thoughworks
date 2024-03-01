@@ -60,14 +60,14 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
     <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'rgba(166, 34, 84, 0.0)', boxShadow: 24, p: 4 }}>
       <Card sx={{ minWidth: 275, backgroundColor: 'rgba(166, 34, 84, 0.9)', color: 'white' }}>
         <CardContent>
-          <Typography sx={{ color: 'black', fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ color: 'white', fontSize: 20 }} color="text.secondary" gutterBottom>
           Información de la tarea
           </Typography>
           <Typography variant="h6" component="div">
             {task.task_title}
           </Typography>
-          <Typography sx={{ color: 'black', mb: 1.5 }} color="text.secondary">
-            Estado: 
+          <Typography sx={{ color: 'white', mb: 1.5 }} color="text.secondary">
+            Estado 
             <Select
               value={taskState}
               onChange={handleStateChange}

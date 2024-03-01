@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Box, Card, Modal, Typography, CardContent } from '@mui/material';
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function TaskList({ isAuthenticated , reloadTasks}) {
+export default function TaskList({ isAuthenticated }) {
     const [tasks, setTasks] = useState([]);
     const navigate = useHistory();
     const {id_proyect}= useParams();
@@ -43,7 +43,7 @@ export default function TaskList({ isAuthenticated , reloadTasks}) {
         if (isAuthenticated) {
             loadTasks();
         }
-    }, [isAuthenticated, reloadTasks]);
+    }, [isAuthenticated]);
 
     const handleOpenModal = (task) => {
         setSelectedTask(task);
@@ -65,16 +65,6 @@ export default function TaskList({ isAuthenticated , reloadTasks}) {
       }
     };
 
-    const updateTaskList = (updatedTask) => {
-        const updatedTasks = tasks.map(task => {
-            if(task.task_id === updatedTask.task_id) {
-                return updatedTask;
-            }
-            return task;
-        });
-        setTasks(updatedTasks);
-    };
-
     return (
         <>
       <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Tareas </h1>
@@ -88,7 +78,7 @@ export default function TaskList({ isAuthenticated , reloadTasks}) {
               marginTop: "20px"
             }}
             key={task.task_id}
-            onClick={() => handleOpenModal(task)} // Changed to open modal
+            onClick={() => handleOpenModal(task)} 
           >
             <CardContent
               style={{
@@ -125,7 +115,7 @@ export default function TaskList({ isAuthenticated , reloadTasks}) {
                 transform: 'translate(-50%, -50%)'
               }}
             >
-          <TaskDashboard task={selectedTask} close={handleCloseModal} updateTaskList={updateTaskList} />
+          <TaskDashboard task={selectedTask} close={handleCloseModal} />
         </Box>
         </Modal>
       </>

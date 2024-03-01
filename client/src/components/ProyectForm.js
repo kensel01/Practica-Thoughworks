@@ -63,10 +63,13 @@ export default function ProyectForm() {
     return (
         <Grid container direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '100vh' }}>
         <Grid item xs={10} sm={6} md={4}>
-          <Card sx={{ position: 'relative', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px',backdropFilter: 'blur(40px)',
+          <Card sx={{ position: 'fixed', backgroundColor: 'transparent', padding: '1rem', borderRadius: '10px',backdropFilter: 'blur(40px)',
         borderRight: '2px solid rgba(255, 255, 255, .2)',
         boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-        
+        top: '50%',
+        left: '50%',
+        transform:'translate(-50%,-50%)',
+        overflowY:'hidden',
         padding: '6px 14px',color: 'white' }}>
             <IconButton
               aria-label="close"

@@ -32,12 +32,10 @@ const ProyectosController = {
     try {
       const { name, description, createby } = req.body;
       const proyectData = await ProyectoService.create(name, description, createby);
-      console.log(proyectData)
       const newProyect = new Proyecto(proyectData.proyect_id, proyectData.name_proyect, proyectData.proyect_description, proyectData.create_by);
-
       await ColaboradoresService.create(newProyect.id, newProyect.createby, "Admin", 1);
       
-      res.status(201).json(newProyect);
+      res.status(201).json(proyectData);
     } catch (error) {
       next(error);
     }

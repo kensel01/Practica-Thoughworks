@@ -16,7 +16,6 @@ import ProyectForm from "./components/ProyectForm";
 import ProyectDashboard from "./components/ProyectDashboard";
 import EpicDashboard from "./components/EpicDashboard";
 import Sidebar from "./components/Sidebar";
-import TaskDashboard from "./components/TaskDashboard";
 import { SidebarProvider } from "./contexts/SidebarContext";
 
 function App() {
