@@ -1,10 +1,7 @@
+import TaskDashboard from './TaskDashboard';
 import { useEffect, useState } from "react";
+import { Box, Card, Modal, Typography, CardContent } from '@mui/material';
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal'; 
-import TaskDashboard from './TaskDashboard'; 
 
 export default function TaskList({ isAuthenticated }) {
     const [tasks, setTasks] = useState([]);
@@ -55,15 +52,14 @@ export default function TaskList({ isAuthenticated }) {
 
     const handleCloseModal = () => setOpenModal(false);
 
-    // Function to determine card style based on task state
     const getCardStyle = (taskState) => {
       switch (taskState) {
         case 0: // Tarea creada
-          return { backgroundColor: 'lightblue' };
+          return { backgroundColor: 'rgba(20, 215, 222, 0.8)' };
         case 1: // Tarea en curso
-          return { backgroundColor: 'yellow' };
+          return { backgroundColor: 'rgba(238, 225, 28, 0.9)' };
         case 2: // Tarea finalizada
-          return { backgroundColor: 'lightgreen' };
+          return { backgroundColor: 'rgba(40, 229, 21, 0.8)'  };
         default:
           return {}; // Default style
       }
@@ -71,17 +67,12 @@ export default function TaskList({ isAuthenticated }) {
 
     return (
         <>
-        <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'justify', 
-        borderRadius: '10px', variant: '5', padding: '1rem' }}> Tareas </h1>
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {tasks.map((task) => (
+      <h1 style={{ color: 'white', fontWeight: 'bold', textAlign: 'justify', borderRadius: '10px', variant: '5', padding: '1rem' }}> Tareas </h1>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {tasks.map((task) => (
           <Card
-            style={{
-              ...getCardStyle(task.task_state),
+            style={{...getCardStyle(task.task_state),
               width: "200px",
-              cursor: "pointer",
-              border: "2px solid transparent",
               padding: "10px", 
               margin: "10px",
               marginTop: "20px"
@@ -111,19 +102,21 @@ export default function TaskList({ isAuthenticated }) {
           aria-labelledby="task-dashboard-modal"
           aria-describedby="task-dashboard-modal-description"
           style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '90%',
-            height: '90%',
-            bgcolor: 'transparent',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-        >
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+              }}
+            >
           <TaskDashboard task={selectedTask} close={handleCloseModal} />
+        </Box>
         </Modal>
       </>
     );

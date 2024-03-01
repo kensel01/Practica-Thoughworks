@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
-
+import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography, IconButton } from '@mui/material'
 
 
 const TaskForm = ({ onClose }) => {
@@ -13,16 +12,13 @@ const TaskForm = ({ onClose }) => {
         state: '0',
         date_start: '',
         date_end: '',
-
     });
 
     const [loading, setLoading] = useState(false);
     const navigate = useHistory();
 
-
     const { id_proyect } = useParams();
     const { id_epic } = useParams();
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +38,6 @@ const TaskForm = ({ onClose }) => {
                 dateStart: task.date_start,
                 dateEnd: task.date_end,
                 epica_id: id_epic
-
             }),
         };
 
@@ -59,7 +54,6 @@ const TaskForm = ({ onClose }) => {
         } finally {
             setLoading(false);
         }
-
     };
 
     const handleChange = e =>
@@ -71,119 +65,63 @@ const TaskForm = ({ onClose }) => {
 
     }, []);
 
-
-
     return (
         <Grid container direction="column" alignItems="center" justifyContent="center">
-            <div> </div>
-            <Grid item xs={12} md={8}>
-                <Card sx={{
-                    position: 'relative',  
-                    backgroundColor: '#A62254', 
-                    padding: '2rem',
+            <Grid item xs={3}>
 
-                }} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', height: '100%' }} >
-                    <IconButton
-                        aria-label="close"
-                        onClick={onClose}
-                        style={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: 'white',
-                        }}
-                    >
+                <Card sx={{ position: 'relative', backgroundColor: '#A62254', padding: '2rem'}}>
+
+                    <IconButton aria-label="close" onClick={onClose}
+                        style={{ position: 'absolute', right: 8, top: 8, color: 'white' }}>
                         <CloseIcon />
                     </IconButton>
+
                     <Typography variant='h7' align='left' style={{ fontSize: '20px', color: 'white' }}>
                         Crear Tarea
                     </Typography>
+
                     <CardContent>
                         <form onSubmit={handleSubmit}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        variant='filled'
-                                        label='Write your title'
-                                        sx={{
-                                            display: 'block',
-                                            margin: '.5rem 0',
-                                            width: '100%'
-                                        }}
-
-                                        name="title"
-                                        value={task.title}
-                                        onChange={handleChange}
-                                        inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' } }}
-                                    />
-
-                                    <TextField
-                                        variant='filled'
-                                        label='Write your description'
-                                        multiline
-                                        rows={4}
-                                        sx={{
-                                            display: 'block',
-                                            margin: '.5rem 0',
-                                            width: '100%'
-                                        }}
-                                        name="description"
-                                        value={task.description}
-                                        onChange={handleChange}
-                                        inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' } }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        variant='filled'
-                                        label='Write your state'
-                                        sx={{
-                                            display: 'block',
-                                            margin: '.5rem 0',
-                                            width: '100%'
-                                        }}
-                                        name="state"
-                                        value={task.state}
-                                        onChange={handleChange}
-                                        inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' } }}
-                                    />
-
-                                    <TextField
-                                        variant='filled'
-                                        label='Dia iniciado'
-                                        type="date"
-                                        sx={{
-                                            display: 'block',
-                                            margin: '.5rem 0',
-                                            width: '100%'
-                                        }}
-                                        name="date_start"
-                                        value={task.date_start}
-                                        onChange={handleChange}
-                                        inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white' , marginBottom: '0.5rem'} }}
-                                    />
-
-                                    <TextField
-                                        variant='filled'
-                                        label='Dia finalizado'
-                                        type="date"
-                                        sx={{
-                                            display: 'block',
-                                            margin: '.5rem 0',
-                                            width: '100%'
-                                        }}
-                                        name="date_end"
-                                        value={task.date_end}
-                                        onChange={handleChange}
-                                        inputProps={{ style: { color: 'white' } }}
-                                        InputLabelProps={{ style: { color: 'white', marginBottom: '0.5rem' } }}
-                                    />
-                                </Grid>
-                            </Grid>
+                            <TextField variant='filled' label='Write your title' multiline rows={2}
+                                sx={{ display: 'block', margin: '.5rem 0', width: '100%' }}
+                                    name="title"
+                                    value={task.title}
+                                    onChange={handleChange}
+                                    inputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white' } }}
+                            />
+                            <TextField variant='filled' label='Write your description' multiline rows={4}
+                                sx={{ display: 'block', margin: '.5rem 0', width: '100%' }}
+                                    name="description"
+                                    value={task.description}
+                                    onChange={handleChange}
+                                    inputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white' } }}
+                            />
+                            <TextField variant='filled' label='Write your state'
+                                sx={{ display: 'block', margin: '.5rem 0', width: '100%' }}
+                                    name="state"
+                                    value={task.state}
+                                    onChange={handleChange}
+                                    inputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white' } }}
+                            />
+                            <TextField variant='filled' label='Dia iniciado' type="date" 
+                                sx={{ display: 'block', margin: '.5rem 0', width: '100%'}}
+                                    name="date_start"
+                                    value={task.date_start}
+                                    onChange={handleChange}
+                                    inputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white' , marginBottom: '0.5rem'} }}
+                            />
+                            <TextField variant='filled' label='Dia finalizado' type="date" 
+                                sx={{ display: 'block', margin: '.5rem 0', width: '100%'}}
+                                    name="date_end"
+                                    value={task.date_end}
+                                    onChange={handleChange}
+                                    inputProps={{ style: { color: 'white' } }}
+                                    InputLabelProps={{ style: { color: 'white', marginBottom: '0.5rem' } }}
+                            />
 
                             <Button variant='contained' color='primary' type='submit' disabled={!task.title || !task.description || !task.state || !task.date_start || !task.date_end}>
                                 {loading ? (

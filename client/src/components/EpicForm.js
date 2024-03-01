@@ -43,7 +43,7 @@ const EpicForm = ({ onClose }) => {
             ;
         }
         catch (error) {
-            console.error('Errir ak crear epica', error);
+            console.error('Error al crear epica', error);
         } finally {
             setLoading(false);
         }

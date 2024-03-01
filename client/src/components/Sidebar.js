@@ -11,7 +11,7 @@ import './styles/Dashboard.css'
 import { useSidebar } from '../contexts/SidebarContext';
 import { jwtDecode } from 'jwt-decode'
 
-const Sidebar = ({ setAuth }) => {
+const Sidebar = ({ setAuth, isAuthenticated }) => {
     const [userInfo, setUserInfo] = useState({});
     const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
     const history = useHistory();
@@ -32,7 +32,6 @@ const Sidebar = ({ setAuth }) => {
                 const userData = await response.json();
                 if (response.ok) {
                     setUserInfo(userData);
-                    console.log(userData.user_name);
                 } else {
                     console.error('Error fetching user info');
                 }
@@ -44,6 +43,9 @@ const Sidebar = ({ setAuth }) => {
         fetchUserInfo(); 
 
     }, []); 
+    useEffect(() => {
+        console.log("Valor de isAuthenticated:", isAuthenticated);
+    }, [isAuthenticated]);
 
     const toggleSidebar = () => {
         const sidebar = document.querySelector('.sidebar');
@@ -52,7 +54,7 @@ const Sidebar = ({ setAuth }) => {
     };
     const handleLogout = () => {
         localStorage.removeItem("token");
-        
+        setAuth(false);
         history.push('/login');
     };
 
@@ -99,7 +101,7 @@ const Sidebar = ({ setAuth }) => {
                     </li>
 
                     <li className="list-item">
-                        <a  onClick={handleLogout}>
+                        <a href="#" onClick={handleLogout}>
                             <i className="bx bx-grid-alt">
                                 <CiLogout />
                             </i>

@@ -41,7 +41,6 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
       }
 
       const updatedTask = await response.json();
-      
       console.log('Tarea actualizada:', updatedTask);
       updateTaskList(updatedTask); 
     } catch (error) {
@@ -54,23 +53,23 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
   }
 
   return (
-    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
-      <Card sx={{ minWidth: 275, backgroundColor: 'rgba(166, 34, 84, 0.7)', color: 'white' }}>
+    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'rgba(166, 34, 84, 0.0)', boxShadow: 24, p: 4 }}>
+      <Card sx={{ minWidth: 275, backgroundColor: 'rgba(166, 34, 84, 0.9)', color: 'white' }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Task Information
+          <Typography sx={{ color: 'black', fontSize: 14 }} color="text.secondary" gutterBottom>
+          Información de la tarea
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h6" component="div">
             {task.task_title}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            State: 
+          <Typography sx={{ color: 'black', mb: 1.5 }} color="text.secondary">
+            Estado: 
             <Select
               value={taskState}
               onChange={handleStateChange}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
-              sx={{ ml: 1, color: 'white', bgcolor: 'rgba(166, 34, 84, 0.5)' }}
+              sx={{ ml: 1, color: 'black', bgcolor: 'rgba(255, 253, 253, 0.8)' }}
             >
               <MenuItem value={0}>Creada</MenuItem>
               <MenuItem value={1}>En curso</MenuItem>
@@ -78,16 +77,16 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
             </Select>
           </Typography>
           <Typography variant="body2">
-            Description: {task.task_description}
+            Descripción: {task.task_description}
             <br />
-            Start Date: {formatDate(task.date_start)}
+            Dia iniciado: {formatDate(task.date_start)}
             <br />
-            End Date: {formatDate(task.date_end)}
+            Dia finalizado: {formatDate(task.date_end)}
           </Typography>
         </CardContent>
       </Card>
-      <button onClick={saveTaskState} style={{ marginTop: '20px', backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Save</button>
-      <button onClick={close} style={{ marginTop: '20px', backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Close</button>
+      <button onClick={saveTaskState} style={{ backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginRight: '20px'}}>Guardar</button>
+      <button onClick={close} style={{ marginTop: '20px', backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', }}>Cerrar</button>
     </Box>
   );
 };
