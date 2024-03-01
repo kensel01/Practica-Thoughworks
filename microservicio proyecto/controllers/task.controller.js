@@ -89,6 +89,18 @@ const TareasController = {
       next(error);
     }
   },
+  updateTaskState: async (req, res, next) => {
+    try {
+      const { state } = req.body;
+      const taskData = await TareaService.updateTaskState(req.params.id, state);
+      if (!taskData) {
+        return res.status(404).json({ message: "Tarea no encontrada" });
+      }
+      res.json({ message: "Estado de la tarea actualizado correctamente" });
+    } catch (error) {
+      next(error);
+    }
+  },
   getTasksByEpicId: async (req, res, next) => {
     try {
       const epicId = req.params.epicId;

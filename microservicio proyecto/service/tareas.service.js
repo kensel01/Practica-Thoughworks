@@ -34,6 +34,13 @@ const TareaService = {
     );
     return result.rows[0];
   },
+  updateTaskState: async (id, state) => {
+    const result = await pool.query(
+      "UPDATE tareas SET task_state = $2 WHERE task_id = $1 RETURNING *",
+      [id, state]
+    );
+    return result.rows[0];
+  },
   getTasksByEpicId: async (epicId) => {
     const result = await pool.query("SELECT * FROM tareas WHERE epica_id = $1", [epicId]);
     return result.rows;

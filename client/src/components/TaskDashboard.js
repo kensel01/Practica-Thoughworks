@@ -10,11 +10,11 @@ const formatDate = (dateString) => {
 };
 
 const TaskDashboard = ({ task, close, updateTaskList }) => {
-  const [taskState, setTaskState] = useState(task ? task.task_state : '');
+  const [taskState, setTaskState] = useState(task ? parseInt(task.task_state) : 0);
   const { id_proyect,id_epic } = useParams();
 
   const handleStateChange = async (event) => {
-    const newState = event.target.value;
+    const newState = parseInt(event.target.value);
     setTaskState(newState);
   };
 
@@ -32,7 +32,6 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
         },
         body: JSON.stringify({
           state: taskState,
-          
         }),
       });
 
@@ -42,7 +41,12 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
 
       const updatedTask = await response.json();
       console.log('Tarea actualizada:', updatedTask);
-      updateTaskList(updatedTask); 
+      if (typeof updateTaskList === "function") {
+        updateTaskList(updatedTask);
+      } else {
+        console.error('updateTaskList is not a function');
+      }
+      close(); 
     } catch (error) {
       console.error('Error al actualizar la tarea:', error);
     }
