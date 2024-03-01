@@ -69,12 +69,7 @@ function App() {
 
               <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
                 <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-              <Route path="/proyect/:id_proyect/epic/:id_epic/task/:id_task" render={props => isAuthenticated ? (
-                <TaskDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-
-              
-
+                
             </Container>
           </Switch>
         </SidebarProvider>

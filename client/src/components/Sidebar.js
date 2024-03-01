@@ -114,5 +114,3 @@ const Sidebar = ({ setAuth }) => {
 }
 
 export default Sidebar;
-
-
