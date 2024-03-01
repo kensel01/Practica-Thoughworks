@@ -4,7 +4,7 @@ import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typograph
 import CloseIcon from '@mui/icons-material/Close';
 
 
-const EpicForm = ({ onClose, onEpicCreated }) => { 
+const EpicForm = ({ onClose, onEpicCreated }) => {
     const [epics, setEpics] = useState({
         title: '',
         description: '',
@@ -71,8 +71,8 @@ const EpicForm = ({ onClose, onEpicCreated }) => {
             <div> </div>
             <Grid item xs={3}>
                 <Card sx={{
-                    position: 'relative',  
-                    backgroundColor: '#A62254', 
+                    position: 'relative',
+                    backgroundColor: '#A62254',
                     padding: '2rem',
                 }} >
                     <IconButton
@@ -99,14 +99,14 @@ const EpicForm = ({ onClose, onEpicCreated }) => {
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
-    
+
                                 name="title"
                                 value={epics.title}
                                 onChange={handleChange}
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
                             />
-    
+
                             <TextField
                                 variant='filled'
                                 label='Write your description'
@@ -122,7 +122,7 @@ const EpicForm = ({ onClose, onEpicCreated }) => {
                                 inputProps={{ style: { color: 'white' } }}
                                 InputLabelProps={{ style: { color: 'white' } }}
                             />
-    
+
                             <Button variant='contained' color='primary' type='submit' disabled={!epics.title || !epics.description}>
                                 {loading ? (
                                     <CircularProgress
@@ -131,13 +131,13 @@ const EpicForm = ({ onClose, onEpicCreated }) => {
                                     "Save"
                                 )}
                             </Button>
-    
+
                         </form>
                     </CardContent>
                 </Card>
             </Grid>
         </Grid>
-    );    
+    );
 }
 
 export default EpicForm;
