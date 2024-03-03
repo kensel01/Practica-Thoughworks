@@ -9,9 +9,10 @@ import { useHistory } from 'react-router-dom';
 import { Box } from '@mui/material';
 import './styles/Dashboard.css'
 import { useSidebar } from '../contexts/SidebarContext';
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
-const Sidebar = ({ setAuth, isAuthenticated }) => {
+const Sidebar = ({ setAuth, isAuthenticated, userId}) => {
     const [userInfo, setUserInfo] = useState({});
     const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
     const history = useHistory();
@@ -92,12 +93,12 @@ const Sidebar = ({ setAuth, isAuthenticated }) => {
                     </li>
 
                     <li className="list-item">
-                        <a href="#">
+                        <Link to="/update-user/:user_id">
                             <i className="bx bx-grid-alt">
                                 <FaCalendarAlt />
                             </i>
                             <span className="link-name" style={{ '--i': 3 }}> Configuracion </span>
-                        </a>
+                        </Link>
                     </li>
 
                     <li className="list-item">

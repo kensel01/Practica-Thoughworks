@@ -31,6 +31,29 @@ const UserController = {
     const user = await UserService.getUser(req.params.user_id);
     res.json(user);
   },
+  updateUser: async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      
+      const userId = req.params.user_id;
+      const { user_name, user_password, email } = req.body;
+
+      const existingUser = await UserService.getUser(userId);
+      if (!existingUser) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+      }
+      
+      await UserService.updateUser(userId, { user_name, user_password, email });
+      
+      res.json({ message: 'Usuario actualizado correctamente' });
+    } catch (error) {
+      console.error('Error al actualizar el usuario:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  },
 };
 
 module.exports = UserController;

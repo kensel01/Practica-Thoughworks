@@ -26,9 +26,10 @@ const UserService = {
     return result.rows[0];
   },
 
-  updateUser: async (user_id, user_name, user_password, email) => {
+  updateUser: async (user_id, userData) => {
+    const { user_name, user_password, email } = userData;
     const result = await pool.query(
-      "UPDATE Users SET user_name =$1, user_password=$2, email=$3 WHERE user_id=$4 RETURNING *",
+      "UPDATE Users SET user_name = $2, user_password = $3, email = $4 WHERE user_id = $1 RETURNING *",
       [user_id, user_name, user_password, email]
     );
     return result.rows[0];

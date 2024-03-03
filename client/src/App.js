@@ -17,6 +17,7 @@ import ProyectDashboard from "./components/ProyectDashboard";
 import EpicDashboard from "./components/EpicDashboard";
 import Sidebar from "./components/Sidebar";
 import { SidebarProvider } from "./contexts/SidebarContext";
+import UserUpdateForm from "./components/UpdateUserForm";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,7 +69,9 @@ function App() {
 
               <Route path="/proyect/:id_proyect/epic/:id_epic" render={props => isAuthenticated ? (
                 <EpicDashboard {...props} isAuthenticated={isAuthenticated} />) : (<Redirect to="/login" />)} />
-                
+              
+              <Route exact path="/update-user/:user_id" component={UserUpdateForm} />
+
             </Container>
           </Switch>
         </SidebarProvider>
