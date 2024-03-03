@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
 import { Box, Typography } from "@mui/material";
 import ProyectList from "./proyectList";
-import { useHistory } from 'react-router-dom';
 import { useSidebar } from '../contexts/SidebarContext';
 import './styles/Dashboard.css'
 
 const Dashboard = ({ isAuthenticated }) => {
-  const history = useHistory();
+
   const { isSidebarOpen } = useSidebar();
 
   return (

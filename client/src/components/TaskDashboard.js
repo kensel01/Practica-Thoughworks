@@ -9,7 +9,7 @@ const formatDate = (dateString) => {
   return date.toISOString().split('T')[0];
 };
 
-const TaskDashboard = ({ task, close, updateTaskList }) => {
+const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
   const [taskState, setTaskState] = useState(task ? parseInt(task.task_state) : 0);
   const { id_proyect,id_epic } = useParams();
 
@@ -43,8 +43,9 @@ const TaskDashboard = ({ task, close, updateTaskList }) => {
       console.log('Tarea actualizada:', updatedTask);
       if (typeof updateTaskList === "function") {
         updateTaskList(updatedTask);
-      } else {
-        console.error('updateTaskList is not a function');
+      }
+      if (typeof onTaskUpdate === "function") {
+        onTaskUpdate(updatedTask);
       }
       close(); 
     } catch (error) {

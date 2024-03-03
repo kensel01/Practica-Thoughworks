@@ -20,6 +20,7 @@ const EpicDashboard = ({ isAuthenticated }) => {
       loadEpic();
     }
   }, [isAuthenticated, id_proyect, id_epic]);
+
   const loadEpic = async () => {
     const token = localStorage.getItem('token')
     const response = await fetch(`http://localhost:5000/proyect/${id_proyect}/epics/${id_epic}`, {
@@ -45,8 +46,28 @@ const EpicDashboard = ({ isAuthenticated }) => {
 
 
   const handleTaskCreated = (newTask) => {
+    if (epic && newTask) {
+      if (Array.isArray(epic.tasks)) {
+        const updatedTasks = [...epic.tasks, newTask];
+        setEpic({ ...epic, tasks: updatedTasks });
+      }else{
+        setEpic({...epic, tasks:[newTask]});
+      }
+    }
     setReloadTasks(prev => !prev);
   };
+  const onTaskUpdate = (updatedTask) => {
+    setEpic(prevEpic => {
+      const updatedTasks = prevEpic.tasks.map(task => {
+        if (task.task_id === updatedTask.task_id) {
+          return updatedTask;
+        }
+        return task;
+      });
+      return { ...prevEpic, tasks: updatedTasks };
+    });
+  };
+  
 
   return (
     <Fragment>

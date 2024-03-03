@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Box, Card, Modal, Typography, CardContent } from '@mui/material';
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function TaskList({ isAuthenticated }) {
+export default function TaskList({ isAuthenticated, reloadTasks }) {
     const [tasks, setTasks] = useState([]);
     const navigate = useHistory();
     const {id_proyect}= useParams();
@@ -43,7 +43,7 @@ export default function TaskList({ isAuthenticated }) {
         if (isAuthenticated) {
             loadTasks();
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, reloadTasks]);
 
     const handleOpenModal = (task) => {
         setSelectedTask(task);
@@ -63,6 +63,16 @@ export default function TaskList({ isAuthenticated }) {
         default:
           return {}; // Default style
       }
+    };
+    const updateTaskList = (updatedTask) => {
+      const updatedTasks = tasks.map(task => {
+        if(task.task_id === updatedTask.task_id) {
+          return updatedTask; 
+        }
+        return task;
+      });
+    
+      setTasks(updatedTasks); 
     };
 
     return (
