@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Card, CardContent, Typography, Select, MenuItem } from "@mui/material";
+import { Box, Card, CardContent, Typography, Select, MenuItem, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const formatDate = (dateString) => {
@@ -11,11 +11,36 @@ const formatDate = (dateString) => {
 
 const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
   const [taskState, setTaskState] = useState(task ? parseInt(task.task_state) : 0);
+  const [selectedParticipants, setSelectedParticipants] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const { id_proyect,id_epic } = useParams();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('http://localhost:5000/users');
+      const users = await response.json();
+      if (Array.isArray(users)) {
+        setAllUsers(users);
+      } else {
+        setAllUsers([]);
+        console.error('Error fetching users: response is not an array');
+      }
+    };
+    fetchUsers();
+  }, []);
 
   const handleStateChange = async (event) => {
     const newState = parseInt(event.target.value);
     setTaskState(newState);
+  };
+
+  const handleParticipantChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedParticipants(
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
 
   const saveTaskState = async () => {
@@ -32,6 +57,7 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
         },
         body: JSON.stringify({
           state: taskState,
+          participants: selectedParticipants,
         }),
       });
 
@@ -50,6 +76,40 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
       close(); 
     } catch (error) {
       console.error('Error al actualizar la tarea:', error);
+    }
+  };
+
+  const addParticipants = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        return;
+      }
+      const response = await fetch(`http://localhost:5000/proyect/${id_proyect}/epics/${id_epic}/task/${task.task_id}/participants`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          participants: selectedParticipants,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al añadir participantes');
+      }
+
+      const updatedTask = await response.json();
+      console.log('Participantes añadidos:', updatedTask);
+      if (typeof updateTaskList === "function") {
+        updateTaskList(updatedTask);
+      }
+      if (typeof onTaskUpdate === "function") {
+        onTaskUpdate(updatedTask);
+      }
+    } catch (error) {
+      console.error('Error al añadir participantes:', error);
     }
   };
 
@@ -81,6 +141,22 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
               <MenuItem value={2}>Finalizada</MenuItem>
             </Select>
           </Typography>
+          <Typography sx={{ mb: 2 }} color="text.secondary">
+            Participantes
+            <Select
+              multiple
+              value={selectedParticipants}
+              onChange={handleParticipantChange}
+              renderValue={(selected) => selected.join(', ')}
+              sx={{ ml: 1, color: 'white', bgcolor: 'rgba(255, 253, 253, 0.8)' }}
+            >
+              {allUsers.map((user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </Typography>
           <Typography variant="body2">
             Descripción: {task.task_description}
             <br />
@@ -90,8 +166,9 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
           </Typography>
         </CardContent>
       </Card>
-      <button onClick={saveTaskState} style={{ backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginRight: '20px'}}>Guardar</button>
-      <button onClick={close} style={{ marginTop: '20px', backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', }}>Cerrar</button>
+      <Button onClick={saveTaskState} style={{ backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginRight: '20px'}}>Guardar</Button>
+      <Button onClick={addParticipants} style={{ backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginRight: '20px'}}>Añadir Participantes</Button>
+      <Button onClick={close} style={{ marginTop: '20px', backgroundColor: '#A62254', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', }}>Cerrar</Button>
     </Box>
   );
 };

@@ -142,6 +142,16 @@ const TareasController = {
     }
   },
   
+  updateTaskParticipants: async (req, res, next) => {
+    try {
+      const { participants } = req.body;
+      const taskId = req.params.taskId;
+      await TareaService.updateTaskParticipants(taskId, participants);
+      res.json({ message: "Participantes de la tarea actualizados correctamente" });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = TareasController;

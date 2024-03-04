@@ -17,7 +17,7 @@ const UserService = {
     );
     return result.rows[0];
   },
-  getAllUser: async () => {
+  getAllUsers: async () => {
     const result = await pool.query("SELECT * FROM Users");
     return result.rows;
   },

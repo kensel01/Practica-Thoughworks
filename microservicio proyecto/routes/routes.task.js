@@ -8,7 +8,8 @@ const {
   updateTask,
   getTasksByEpicId,
   getTasksByUserId,
-  updateTaskState
+  updateTaskState,
+  updateTaskParticipants // Assuming this is the new function to be added
 } = require("../controllers/task.controller");
 const verifyToken = require("../middleware/authMiddleware");
 
@@ -23,6 +24,8 @@ router.post("/proyect/:proyectId/sprint/:sprint_Id/task",verifyToken, createTask
 
 router.put("/proyect/:proyectId/epics/:epicId/task/:id",verifyToken, updateTaskState);
 router.put("/proyect/:proyectId/sprint/:sprint_Id/task/:id",verifyToken, updateTask);
+
+router.put("/proyect/:proyectId/epics/:epicId/task/:taskId/participants", verifyToken, updateTaskParticipants); 
 
 router.get("/user/:userId/tasks", verifyToken, getTasksByUserId);
 

@@ -52,5 +52,22 @@ const TareaService = {
     );
     return result.rows;
   },
+  updateTaskParticipants: async (taskId, participants) => {
+  
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      await client.query('DELETE FROM usuario_tarea WHERE task_id = $1', [taskId]);
+      for (const userId of participants) {
+        await client.query('INSERT INTO usuario_tarea (user_id, task_id) VALUES ($1, $2)', [userId, taskId]);
+      }
+      await client.query('COMMIT');
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
 };
 module.exports = TareaService;
