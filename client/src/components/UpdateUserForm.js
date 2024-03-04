@@ -1,10 +1,10 @@
 import { Button, Card, CardContent, CircularProgress, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useHistory, useParams} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import { jwtDecode } from 'jwt-decode';
 
 const UserUpdateForm = () => {
-  const { user_id } = useParams(); 
   const [user, setUser] = useState({
     email: '',
     user_password: '',
@@ -12,16 +12,31 @@ const UserUpdateForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
+  
   useEffect(() => {
-    console.log('user_id:', user_id); 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/users/${user_id}`);
+        const token= localStorage.getItem('token');
+        if (!token){
+          console.log("no token found");
+          return;
+        }
+        const decodedToken = jwtDecode(token);
+        const user_id = decodedToken.user_id;
+
+        const response = await fetch(`http://localhost:5000/users/${user_id}`,{
+          method: "GET",
+          headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
         const userData = await response.json();
+        // Initialize password field as empty string
+        userData.user_password = '';
         setUser(userData);
         console.log('Datos del usuario obtenidos:', user);
       } catch (error) {
@@ -29,7 +44,7 @@ const UserUpdateForm = () => {
       }
     };
     fetchUserData();
-  }, [user_id]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,12 +57,14 @@ const UserUpdateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log('Valor de user_id:', user_id);
-
+    const token= localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
+    const user_id = decodedToken.user_id;
     const requestOptions = {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify(user)
     };
@@ -146,5 +163,4 @@ const UserUpdateForm = () => {
   
 };
 
-export default UserUpdateForm;
-
+export default UserUpdateForm

@@ -23,7 +23,7 @@ const Sidebar = ({ setAuth, isAuthenticated, userId}) => {
                 const token = localStorage.getItem('token');
                 const decoded = jwtDecode(token);
                 const userId = decoded.user_id;
-                const response = await fetch(`http://localhost:5000/user/${userId}`, {
+                const response = await fetch(`http://localhost:5000/users/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
