@@ -26,7 +26,6 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
         }, 
       });
       const users = await response.json();
-      console.log('Fetched users:', users); // Added to show users obtained from the API
       if (Array.isArray(users)) {
         setAllUsers(users);
       } else {
