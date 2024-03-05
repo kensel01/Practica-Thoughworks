@@ -17,8 +17,16 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch('http://localhost:5000/users');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/users',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        }, 
+      });
       const users = await response.json();
+      console.log('Fetched users:', users); // Added to show users obtained from the API
       if (Array.isArray(users)) {
         setAllUsers(users);
       } else {
@@ -141,7 +149,7 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
               <MenuItem value={2}>Finalizada</MenuItem>
             </Select>
           </Typography>
-          <Typography sx={{ mb: 2 }} color="text.secondary">
+          <Typography sx={{ mb: 2, color: 'white'}} color="text.secondary">
             Participantes
             <Select
               multiple
@@ -151,8 +159,8 @@ const TaskDashboard = ({ task, close, updateTaskList, onTaskUpdate }) => {
               sx={{ ml: 1, color: 'white', bgcolor: 'rgba(255, 253, 253, 0.8)' }}
             >
               {allUsers.map((user) => (
-                <MenuItem key={user.id} value={user.id}>
-                  {user.name}
+                <MenuItem key={user.id} value={user.user_id}>
+                  {user.user_name}
                 </MenuItem>
               ))}
             </Select>

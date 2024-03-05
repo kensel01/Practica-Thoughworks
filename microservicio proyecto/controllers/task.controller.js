@@ -146,8 +146,8 @@ const TareasController = {
     try {
       const { participants } = req.body;
       const taskId = req.params.taskId;
-      await TareaService.updateTaskParticipants(taskId, participants);
-      res.json({ message: "Participantes de la tarea actualizados correctamente" });
+      const updateResult = await TareaService.updateTaskParticipants(taskId, participants);
+      res.json(updateResult);
     } catch (error) {
       next(error);
     }

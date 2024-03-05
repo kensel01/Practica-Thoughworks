@@ -62,6 +62,7 @@ const TareaService = {
         await client.query('INSERT INTO usuario_tarea (user_id, task_id) VALUES ($1, $2)', [userId, taskId]);
       }
       await client.query('COMMIT');
+      return { message: "Participantes actualizados correctamente", taskId: taskId, participants: participants };
     } catch (error) {
       await client.query('ROLLBACK');
       throw error;
